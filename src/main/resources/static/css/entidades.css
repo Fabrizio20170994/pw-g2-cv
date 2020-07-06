@@ -1,0 +1,36 @@
+.fila {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+}
+
+.fila1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border: solid;
+    margin-top: 1.5em;
+}
+
+.título {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.enviar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.boton-container {
+    position: relative;
+    height: 2em;
+    margin-bottom: 0 !important;
+    margin-top: 20px !important;
+}
+
+.fa-pencil-square-o {
+    color: black;
+}

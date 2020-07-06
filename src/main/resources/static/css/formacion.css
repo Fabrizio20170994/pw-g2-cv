@@ -1,0 +1,24 @@
+.fa-pencil-square-o {
+    color: black;
+}
+
+a.edit-button {
+    pointer-events: auto;
+}
+
+.select-input {
+    width: auto !important;
+}
+
+div.form-group > label[for=infoTypeSelect] {
+    margin-right: 1rem;
+}
+
+.formacion-desc {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.pagination {
+    margin-top: 1rem;
+}

@@ -1,0 +1,43 @@
+.margin_top{
+    margin-top: 1.5rem;
+}
+.border_bottom{
+    border-bottom: solid 0.05em;
+}
+.sin_margin_bottom{
+    margin-bottom: 0%;
+}
+.sin_margin_top{
+    margin-bottom: 0%;
+}
+.sin_padding_bottom{
+    padding-bottom: 0%;
+}
+.fila{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+}
+.fila1{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border: solid;
+}
+.centrado{
+    text-align: center;
+}
+.actualizar{
+    font-size: small;
+    text-align: inherit;
+}
+.total{
+    position: relative;
+}
+.total_texto{
+    position: absolute;
+    right:15px;
+    bottom:0;
+    margin-bottom: 0;
+}
