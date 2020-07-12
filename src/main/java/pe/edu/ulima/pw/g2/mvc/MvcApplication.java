@@ -1,7 +1,9 @@
 package pe.edu.ulima.pw.g2.mvc;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class MvcApplication {
@@ -10,6 +12,10 @@ public class MvcApplication {
     SpringApplication.run(MvcApplication.class, args);
   }
 
+  @Bean
+  public ModelMapper modelMapper() {
+    return new ModelMapper();
+  }
 
   /*
     Descomentar el metodo de abajo, importar todo y correrlo una vez

@@ -14,11 +14,9 @@ import pe.edu.ulima.pw.g2.mvc.services.UserDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-  
-  //Necesario para evitar que la seguridad se aplique a los resources
-  //Como los css, imagenes y javascripts
+
   String[] resources = new String[] {
-    "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**", "/", "/formacion"
+    "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**"
   };
 
   @Override
@@ -26,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http
       .authorizeRequests()
         .antMatchers(resources).permitAll()
+        .antMatchers("/admin/**").hasAuthority("Administrador")
         .anyRequest().authenticated()
         .and()
       .formLogin()
@@ -34,7 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl("/me")
         .and()
       .logout()
-        .permitAll();
+        .permitAll()
+        .and()
+      .exceptionHandling().accessDeniedPage("/accessDenied");
   }
 
   BCryptPasswordEncoder bCryptPasswordEncoder;

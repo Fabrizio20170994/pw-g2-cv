@@ -77,6 +77,25 @@
       <version>3.0.4.RELEASE</version>
     </dependency>
     <!-- *** -->
+    <!-- Validation -->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>2.0.0.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.0.1.Final</version>
+    </dependency>
+    <!-- *** -->
+    <!-- DTO a Entity -->
+    <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>2.3.5</version>
+    </dependency>
+    <!-- *** -->
   </dependencies>
 
   <build>

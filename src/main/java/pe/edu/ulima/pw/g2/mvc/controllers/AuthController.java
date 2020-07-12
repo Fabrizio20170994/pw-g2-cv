@@ -11,8 +11,8 @@ public class AuthController {
     return "login";
   }
 
-  @GetMapping(value = "/me")
-  public String accountPage() {
-    return "mi-cuenta";
+  @GetMapping(value = "/accessDenied")
+  public String accessDenied() {
+    return "403";
   }
 }

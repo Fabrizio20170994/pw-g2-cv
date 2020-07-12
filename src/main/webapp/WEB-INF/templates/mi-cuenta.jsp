@@ -31,19 +31,22 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <h4>Nombre:</h4>
-              <h6>Fabricio Sotelo Parra</h6>
+              <h6 th:text="${#authentication.getPrincipal().getNombre()} + 
+                ' ' + ${#authentication.getPrincipal().getApellido()}">
+                (Sin nombre)
+              </h6>
             </li>
             <li class="list-group-item">
               <h4>Correo:</h4>
-              <h6>FabricioSot@correoexample.com</h6>
+              <h6 th:text="${#authentication.getPrincipal().getEmail()}"></h6>
             </li>
             <li class="list-group-item">
               <h4>Rol:</h4>
-              <h6>Usuario</h6>
+              <h6 th:text="${#authentication.getPrincipal().getRole().getNombre()}">Usuario</h6>
             </li>
             <li class="list-group-item">
               <h4>Estado:</h4>
-              <h6>Activo</h6>
+              <h6 th:if="${#authentication.getPrincipal().getActive()}">Activo</h6>
             </li>
           </ul>
         </div>

@@ -1,7 +1,6 @@
 package pe.edu.ulima.pw.g2.mvc.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,11 +21,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
       () -> new UsernameNotFoundException("No existe usuario")
     );
     
-    UserDetails user = (UserDetails) appUser;
-    
-    for (GrantedAuthority authority : user.getAuthorities()) {
-      System.out.println(authority.getAuthority());
-    }
-    return user;
+    return appUser;
   }
 }

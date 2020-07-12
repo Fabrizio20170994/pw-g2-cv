@@ -38,7 +38,7 @@
           <a class="nav-link" href="/cv">CV</a>
         </li>
         <li sec:authorize="hasAuthority('Administrador')" class="nav-item">
-          <a class="nav-link" href="/usuarios">Usuarios</a>
+          <a class="nav-link" th:href="@{/admin/users}">Usuarios</a>
           <!--solo se muestra si es admin-->
         </li>
         <li class="nav-item">
