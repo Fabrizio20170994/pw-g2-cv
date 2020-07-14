@@ -5,9 +5,6 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class OcupationDTO {
-    @NotNull
-    @NotEmpty
-    private Long id;
 
     @NotNull
     @NotEmpty
@@ -32,22 +29,13 @@ public class OcupationDTO {
     public OcupationDTO() {
     }
 
-    public OcupationDTO(@NotNull @NotEmpty Long id, @NotNull @NotEmpty Long entidad, @NotNull @NotEmpty String nombre,
+    public OcupationDTO(@NotNull @NotEmpty Long entidad, @NotNull @NotEmpty String nombre,
             @NotNull @NotEmpty String descripcion, @NotNull @NotEmpty Date anioI, @NotNull @NotEmpty Date anioF) {
-        this.id = id;
         this.entidad = entidad;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.anioI = anioI;
         this.anioF = anioF;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getEntidad() {
