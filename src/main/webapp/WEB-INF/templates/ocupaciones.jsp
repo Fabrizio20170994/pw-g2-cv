@@ -74,7 +74,7 @@
           </button>
         </form>
         <div class="col-md-2"></div>
-        <button type="button" class="btn btn-success bot-ocup" data-toggle="modal" data-target="#crear">
+        <button type="button" class="btn btn-success bot-ocup" data-toggle="modal" data-target="#crear" id="modalCrear" onclick="main()">
           Agregar ocupación
         </button>
       </div>
@@ -85,7 +85,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Crear ocupacion</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" href="/ocupaciones">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -114,7 +114,7 @@
                       <label for="ocup">
                         Descripcion:
                       </label>
-                      <textarea type="text" class="input-text-area form-control" name="descripcionOcup"></textarea>
+                      <textarea type="text" class="input-text-area form-control" name="descripcionOcup" id="descripcionOcup"></textarea>
                     </div>
                   </div>
                   <div class="row">
@@ -122,24 +122,36 @@
                       <label for="ocup">
                         Año inicio:
                       </label>
-                      <input type="number" class="años form-control" name="anioIOcup" />
+                      <input type="number" class="años form-control" name="anioIOcup" id="anioIOcup"/>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="ocup">
                         Año final:
                       </label>
-                      <input type="number" class="años form-control" name="anioFOcup"/>
+                      <input type="number" class="años form-control" name="anioFOcup" id="anioFOcup"/>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 centro">
-                      <button type="submit" class="btn btn-success bot-ocup">
+                      <button type="submit" class="btn btn-success bot-ocup" id="submitCrear" disabled >
                         Agregar
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
+              <div class="alert alert-danger escondido" role="alert" id="fallaAnios">
+                Los años no cuadran
+              </div>
+              <div class="alert alert-danger escondido" role="alert" id="excesoDescripcion">
+                Descripcion supera las 30 palabras
+              </div>
+              <div class="alert alert-danger escondido" role="alert" id="excesoNombre">
+                Nombre supera los 250 caracteres
+              </div>
+              <div class="alert alert-danger escondido" role="alert" id="anioImayor">
+                El año final es menor al inicial
+              </div>
             <!---->
             </div>
           </div>
@@ -215,18 +227,7 @@
           </div>
         </div>
       </div>
-      <div class="alert alert-danger" role="alert">
-        El año de fin es menor que el de inicio
-      </div>
-      <div class="alert alert-danger" role="alert">
-        Descripcion supera las 30 palabras
-      </div>
-      <div class="alert alert-danger" role="alert">
-        Nombre supera los 250 caracteres
-      </div>
-      <div class="alert alert-danger" role="alert">
-        Falta llenar un campo
-      </div>
+      
     </div>
     <div class="container contenido">
       <div class="row fila1" >
@@ -264,6 +265,7 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/ocupaciones.js"></script>
     <!--<script>
       $('#crear').modal('toggle')
     </script>-->

@@ -42,3 +42,6 @@ input[type=number]{
 .centro{
     text-align: center;
 }
+.escondido{
+    display: none;
+}
