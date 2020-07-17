@@ -19,8 +19,8 @@ public class OcupationEntity {
     private Long id;
     private String nombre;
     private String descripcion;
-    private Date anioI;
-    private Date anioF;
+    private int anioI;
+    private int anioF;
      
     @ManyToOne
     private EntityEntity entidad;
@@ -52,19 +52,19 @@ public class OcupationEntity {
         this.descripcion = descripcion;
     }
 
-    public Date getAnioI() {
+    public int getAnioI() {
         return this.anioI;
     }
 
-    public void setAnioI(Date anioI) {
+    public void setAnioI(int anioI) {
         this.anioI = anioI;
     }
 
-    public Date getAnioF() {
+    public int getAnioF() {
         return this.anioF;
     }
 
-    public void setAnioF(Date anioF) {
+    public void setAnioF(int anioF) {
         this.anioF = anioF;
     }
 
