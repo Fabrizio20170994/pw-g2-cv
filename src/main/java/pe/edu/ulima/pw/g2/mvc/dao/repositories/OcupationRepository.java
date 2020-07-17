@@ -11,4 +11,5 @@ import pe.edu.ulima.pw.g2.mvc.dao.entities.OcupationEntity;
 public interface OcupationRepository extends JpaRepository<OcupationEntity, Long> {
     @Query("SELECT u FROM OcupationEntity u WHERE u.entidad = ?1")
     public List<OcupationEntity> sacarOcupacionesDeEntidades(EntityEntity entidad);
+
 }

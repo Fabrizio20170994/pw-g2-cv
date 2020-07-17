@@ -5,26 +5,26 @@ public class OcupacionForm {
     private String entidad_nombre;
     private String nombreOcup;
     private String descripcionOcup;
-    private int anioIOcup;
-    private int anioFOcup;
+    private String anioIOcup;
+    private String anioFOcup;
 
     public OcupacionForm() {
 
     }
 
-    public int getAnioFOcup() {
+    public String getAnioFOcup() {
         return anioFOcup;
     }
 
-    public void setAnioFOcup(int anioFOcup) {
+    public void setAnioFOcup(String anioFOcup) {
         this.anioFOcup = anioFOcup;
     }
 
-    public int getAnioIOcup() {
+    public String getAnioIOcup() {
         return anioIOcup;
     }
 
-    public void setAnioIOcup(int anioIOcup) {
+    public void setAnioIOcup(String anioIOcup) {
         this.anioIOcup = anioIOcup;
     }
 

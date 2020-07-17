@@ -61,31 +61,25 @@
 
     <div class="container">
       <h2 id="titulo">Ocupaciones</h2>
-      <label>Filtrar por entidad:</label>
-      <div class="dropdown">
-        <button
-          class="btn btn-info dropdown-toggle bot-ocup bot-filt"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Entidades
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Entidad 1</a>
-          <a class="dropdown-item" href="#">Entidad 2</a>
-          <a class="dropdown-item" href="#">Entidad 3</a>
-          <a class="dropdown-item" href="#">Entidad 4</a>
-          <a class="dropdown-item" href="#">Entidad 5</a>
-          <a class="dropdown-item" href="#">Entidad 6</a>
-        </div>
+      <div class="row">
+        <label class="col-md-3">Filtrar por entidad:</label>
+      </div>
+      <div class="row">
+        <form method="GET" action="/ocupaciones_filtradas" class="col-md-5">
+          <select name="entidad" class="form-control btn btn-info bot-ocup bot-filt col-md-8">
+            <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo</option>
+          </select>
+          <button type="submit" class="btn btn-secondary bot-ocup col-md-4">
+            Ordenar
+          </button>
+        </form>
+        <div class="col-md-2"></div>
         <button type="button" class="btn btn-success bot-ocup" data-toggle="modal" data-target="#crear">
           Agregar ocupación
         </button>
       </div>
-      <!---->
+
+      <!-- Modal de creacion-->
       <div class="modal fade alert" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -98,6 +92,72 @@
             <div class="modal-body">
               <!---->
               <form method ="POST" action="/guardar_ocupacion">
+                <div class="container">
+                  <div class="row">
+                    <div class="form-group col-md-6"> 
+                      <label for = "ocup">
+                        Entidad:
+                      </label>
+                      <select name="entidad_nombre" class="form-control">
+                        <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for = "ocup">
+                        Nombre:
+                      </label>
+                      <input type="text" class="text form-control" id="nombre_ocup" name="nombreOcup"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <label for="ocup">
+                        Descripcion:
+                      </label>
+                      <textarea type="text" class="input-text-area form-control" name="descripcionOcup"></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="ocup">
+                        Año inicio:
+                      </label>
+                      <input type="number" class="años form-control" name="anioIOcup" />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="ocup">
+                        Año final:
+                      </label>
+                      <input type="number" class="años form-control" name="anioFOcup"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 centro">
+                      <button type="submit" class="btn btn-success bot-ocup">
+                        Agregar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            <!---->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--modal update-->
+      <div class="modal fade alert" id="modificar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">modificar ocupacion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!---->
+              <form method ="POST" action="/modificar_ocupacion">
                 <div class="container">
                   <div class="row">
                     <div class="form-group col-md-6"> 
@@ -154,75 +214,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <!---->
-      <!---->
-      <div class="alert alert-warning" role="alert">
-        <form>
-          <div class="container">
-            <div class="row">
-              <label class="col-md-2">
-                Entidad:
-              </label>
-              <label class="col-md-2">
-                Nombre:
-              </label>
-              <label class="col-md-7">
-                Descripcion:
-              </label>
-            </div>
-            <div class="row">
-              <div class="dropdown col-md-2">
-                <button
-                  class="btn btn-secondary dropdown-toggle bot-ocup ent"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Entidad
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Entidad 1</a>
-                  <a class="dropdown-item" href="#">Entidad 2</a>
-                  <a class="dropdown-item" href="#">Entidad 3</a>
-                  <a class="dropdown-item" href="#">Entidad 4</a>
-                  <a class="dropdown-item" href="#">Entidad 5</a>
-                  <a class="dropdown-item" href="#">Entidad 6</a>
-                </div>
-              </div>
-              <div class="col-md-2">
-                <input type="text" class="text" />
-              </div>
-              <div class="col-md-7">
-                <textarea type="text" class="input-text-area"></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-md-2">
-                Año inicio:
-              </label>
-              <label class="col-md-2">
-                Año final:
-              </label>
-            </div>
-            <div class="row">
-              <div class="col-md-2">
-                <input type="number" class="años" />
-              </div>
-              <div class="col-md-2">
-                <input type="number" class="años" />
-              </div>
-              <div class="col-md-6"></div>
-              <div class="col-md-2">
-                <button type="submit" class="btn btn-warning bot-ocup" disabled>
-                  Actualizar
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
       </div>
       <div class="alert alert-danger" role="alert">
         El año de fin es menor que el de inicio
