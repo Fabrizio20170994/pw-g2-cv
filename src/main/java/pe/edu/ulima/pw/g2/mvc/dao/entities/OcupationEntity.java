@@ -1,6 +1,6 @@
 package pe.edu.ulima.pw.g2.mvc.dao.entities;
 
-import java.util.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +17,7 @@ public class OcupationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     private String nombre;
     private String descripcion;
     private int anioI;

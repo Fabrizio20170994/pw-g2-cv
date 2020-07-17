@@ -2,7 +2,6 @@ package pe.edu.ulima.pw.g2.mvc.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 public class OcupationDTO {
 
@@ -20,22 +19,13 @@ public class OcupationDTO {
 
     @NotNull
     @NotEmpty
-    private Date anioI;
+    private int anioI;
 
     @NotNull
     @NotEmpty
-    private Date anioF;
+    private int anioF;
 
     public OcupationDTO() {
-    }
-
-    public OcupationDTO(@NotNull @NotEmpty Long entidad, @NotNull @NotEmpty String nombre,
-            @NotNull @NotEmpty String descripcion, @NotNull @NotEmpty Date anioI, @NotNull @NotEmpty Date anioF) {
-        this.entidad = entidad;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.anioI = anioI;
-        this.anioF = anioF;
     }
 
     public Long getEntidad() {
@@ -62,20 +52,28 @@ public class OcupationDTO {
         this.descripcion = descripcion;
     }
 
-    public Date getAnioI() {
+    public int getAnioI() {
         return this.anioI;
     }
 
-    public void setAnioI(Date anioI) {
+    public void setAnioI(int anioI) {
         this.anioI = anioI;
     }
 
-    public Date getAnioF() {
+    public int getAnioF() {
         return this.anioF;
     }
 
-    public void setAnioF(Date anioF) {
+    public void setAnioF(int anioF) {
         this.anioF = anioF;
     }
     
+    public OcupationDTO(@NotNull @NotEmpty Long entidad, @NotNull @NotEmpty String nombre,
+            @NotNull @NotEmpty String descripcion, @NotNull @NotEmpty int anioI, @NotNull @NotEmpty int anioF) {
+        this.entidad = entidad;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.anioI = anioI;
+        this.anioF = anioF;
+    }
 }
