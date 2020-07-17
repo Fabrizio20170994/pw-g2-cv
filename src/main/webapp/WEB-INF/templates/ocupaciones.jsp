@@ -91,7 +91,7 @@
             </div>
             <div class="modal-body">
               <!---->
-              <form method ="POST" action="/guardar_ocupacion">
+              <form method ="POST" th:action="@{/guardar_ocupacion}">
                 <div class="container">
                   <div class="row">
                     <div class="form-group col-md-6"> 
