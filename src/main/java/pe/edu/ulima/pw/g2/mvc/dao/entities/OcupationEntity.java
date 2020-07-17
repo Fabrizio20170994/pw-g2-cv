@@ -77,7 +77,7 @@ public class OcupationEntity {
     }
 
 
-    public OcupationEntity(Long id, String nombre, String descripcion, Date anioI, Date anioF, EntityEntity entidad) {
+    public OcupationEntity(Long id, String nombre, String descripcion, int anioI, int anioF, EntityEntity entidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
