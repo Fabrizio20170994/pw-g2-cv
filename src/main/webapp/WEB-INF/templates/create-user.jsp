@@ -69,11 +69,7 @@
               </button>
             </div>
           </div>
-          <div 
-            th:each="error: ${errors}"
-            th:text="${error}"
-            class="alert alert-danger centrado"
-            >
+          <div th:each="error: ${errors}" th:text="${error}" class="alert alert-danger centrado">
             El usuario ya está registrado
           </div>
         </form>

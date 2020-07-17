@@ -22,8 +22,8 @@ public class MvcApplication {
     para limpiar la db y crear la data de prueba.
     Agrega lo que creas conveniente
   */
-
-  /* @Bean
+  /*
+  @Bean
   public CommandLineRunner starterData(UserRepository repoU, RoleRepository repoR) {
     return new CommandLineRunner(){
     
@@ -45,8 +45,13 @@ public class MvcApplication {
             "987654321", "https://www.linkedin.com/in/fab", true, "chulls", admin)
         );
 
+        repoU.saveAndFlush(
+          new UserEntity(null, "Fabricio", "fabricio@gmail.com", "123", "Sotelo", 
+            "956599908", "https://www.linkedin.com/in/fabrix300", true, "oaaaa", admin)
+        );
+
         repoR.flush();
       }
     };
-  } */
+  }*/ 
 }

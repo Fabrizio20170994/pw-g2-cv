@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -88,14 +89,34 @@ public class UserController {
 
       return new ModelAndView("redirect:/admin/create-user");
     }
-    // TODO: agregar alerta de exito
-    return new ModelAndView("redirect:/me");
+    /* TODO: agregar alerta de exito*/
+    String errores = "no";
+    redirectAttributes.addFlashAttribute("errores", errores);
+    return new ModelAndView("redirect:/admin/users");
   }
 
   @GetMapping("/admin/users")
-  public String getUsers() {
-    // TODO: mostrar lista de usuarios, en cada uno link para editUserPage()
-    return "usuarios";
+  public String getUsers(Model model, @RequestParam(name = "filter", required = false) String filter){
+    //TODO: mostrar la lista de usuarios en usuarios
+    if (filter == null){
+      List<UserEntity> listaUsuarios = userRepository.findAll();
+      model.addAttribute("listaUsuarios", listaUsuarios);
+      return "usuarios";
+    }else {
+      if (filter.equals("Ambos")){
+        List<UserEntity> listaUsuarios = userRepository.findAll();
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        return "usuarios";        
+      } else if (filter.equals("Activo")){
+        List<UserEntity> listaUsuarios = userRepository.findByActive(true);
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        return "usuarios"; 
+      } else {
+        List<UserEntity> listaUsuarios = userRepository.findByActive(false);
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        return "usuarios"; 
+      }
+    }
   }
 
   @GetMapping("/admin/user/{id}")
