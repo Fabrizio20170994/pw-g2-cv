@@ -32,7 +32,7 @@
           <a class="nav-link" href="/experiencias">Experiencia</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/formacion">Formación</a>
+          <a class="nav-link" th:href="@{/formacion}">Formación</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/cv">CV</a>
