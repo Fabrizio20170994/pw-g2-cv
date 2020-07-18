@@ -138,7 +138,6 @@ public class UserController {
   @GetMapping("/admin/user/{id}")
   public String editUserPage(@PathVariable String id, Model model) {
     // TODO: Pagina donde el admin edita el rol y estado de un user
-
     Long Id = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(Id); 
     if(opUser.isPresent()){
@@ -159,7 +158,6 @@ public class UserController {
   @PostMapping("/admin/user/{id}/edit")
   public String editUser(@PathVariable String id, EditUserForm editUserForm){
     // TODO: editar usuario con id
-
     Long idUser = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(idUser);
     if(opUser.isPresent()){
