@@ -138,7 +138,6 @@ public class UserController {
   @GetMapping("/admin/user/{id}")
   public String editUserPage(@PathVariable String id, Model model) {
     // TODO: Pagina donde el admin edita el rol y estado de un user
-
     Long Id = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(Id); 
     if(opUser.isPresent()){
@@ -159,7 +158,6 @@ public class UserController {
   @PostMapping("/admin/user/{id}/edit")
   public String editUser(@PathVariable String id, EditUserForm editUserForm){
     // TODO: editar usuario con id
-
     Long idUser = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(idUser);
     if(opUser.isPresent()){
@@ -167,15 +165,8 @@ public class UserController {
       Optional<RoleEntity> opRole = roleRepository.findById(Long.parseLong(editUserForm.getUser_role()));
       if(opRole.isPresent()){
         RoleEntity rol = opRole.get();
-        usuario.setRole(rol);
+        usuario.setRole(rol);  
         usuario.setActive(Boolean.parseBoolean(editUserForm.getUser_active()));
-        usuario.setNombre(editUserForm.getUser_nombre());
-        usuario.setApellido(editUserForm.getUser_apellido());
-        usuario.setEmail(editUserForm.getUser_email());
-        usuario.setTelefono(editUserForm.getUser_telefono());
-        usuario.setDatosRelevantes(editUserForm.getUser_datosRelevantes());
-        usuario.setLinkedinUrl(editUserForm.getUser_linkedinUrl());
-        usuario.setPassword(editUserForm.getUser_password());
         userRepository.saveAndFlush(usuario);
       }
     }else{
