@@ -12,7 +12,7 @@
         <h1>Actualizar Usuario</h1>
       </div>
       <div class="alert alert-warning margin_top sin_padding_bottom">
-        <form action="" method="">
+        <form th:action="@{'/admin/user/'+${userId}+'/edit'}" th:object="${UserForm}" method="POST" enctype="utf8">
           <div class="row justify-content-center">
             <div class="col-md-3 form-group sin_margin_bottom">
               <label for="rol_actualizar">Nuevo rol</label>
@@ -24,18 +24,26 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-md-3 form-group">
-              <input
-                id="rol_actualizar"
-                type="text"
-                name="rol_nuevo"
-                class="form-control"
-              />
+              <input type="hidden" name="user_email" th:value="${usuarioEditar.email}">
+              <input type="hidden" name="user_nombre" th:value="${usuarioEditar.nombre}">
+              <input type="hidden" name="user_password" th:value="${usuarioEditar.password}">
+              <input type="hidden" name="user_apellido" th:value="${usuarioEditar.apellido}">
+              <input type="hidden" name="user_telefono" th:value="${usuarioEditar.telefono}">
+              <input type="hidden" name="user_linkedinUrl" th:value="${usuarioEditar.linkedinUrl}">
+              <input type="hidden" name="user_datosRelevantes" th:value="${usuarioEditar.datosRelevantes}">
+              <select name="user_role" class="form-control" id="rol_nuevo">
+                <option 
+                  th:each="role : ${roles}" 
+                  th:value="${role.id}"
+                  th:text="${role.nombre}"
+                  th:selected="${role.id} == ${idRole}">
+                </option>
+              </select>
             </div>
             <div class="col-md-3 form-group">
-              <select class="form-control" id="estado_actualizar">
-                <option selected>Elegir una opción</option>
-                <option>Activo</option>
-                <option>Inactivo</option>
+              <select name="user_active" class="form-control" id="estado_actualizar">
+                <option value="true" th:selected="${usuarioEditar.active} == true">Activo</option>
+                <option value="false" th:selected="${usuarioEditar.active} == false">Inactivo</option>
               </select>
             </div>
             <div class="col-md-3 centrado">
