@@ -26,34 +26,41 @@ public class MvcApplication {
   }
 
   /*
+   * 
    * Descomentar el metodo de abajo, importar todo y correrlo una vez para limpiar
-   * la db y crear la data de prueba. Agrega lo que creas conveniente
+   * la db y crear la data de prueba. Agrega lo que creas conveniente//
    */
-  /*
-   * @Bean public CommandLineRunner starterData(final UserRepository repoU, final
-   * RoleRepository repoR, final EntityRepository repoE) { return new
-   * CommandLineRunner() {
-   * 
-   * @Override public void run(final String... args) throws Exception {
-   * repoE.deleteAll(); repoU.deleteAll(); repoR.deleteAll();
-   * 
-   * final RoleEntity admin = repoR.save(new RoleEntity(null, "Administrador"));
-   * final RoleEntity pro = repoR.save(new RoleEntity(null, "Profesional"));
-   * 
-   * final UserEntity marselo = repoU.save(new UserEntity(null, "Marselo",
-   * "marcelo@gmail.com", "123", "Inocente", "123456789",
-   * "https://www.linkedin.com/in/marcelo-inocente", true, "gaa", pro));
-   * 
-   * final UserEntity fabrizio = repoU.save(new UserEntity(null, "Fabrizio",
-   * "fabrizio@gmail.com", "123", "MC", "987654321",
-   * "https://www.linkedin.com/in/fab", true, "chulls", admin));
-   * 
-   * repoE.saveAndFlush(new EntityEntity(null, "Ulima", "Universidad de Lima",
-   * marselo)); repoE.saveAndFlush(new EntityEntity(null, "Belcorp", "F",
-   * marselo)); repoE.saveAndFlush(new EntityEntity(null, "DUIS",
-   * "Soporte Blackboard :'v", fabrizio)); repoE.saveAndFlush(new
-   * EntityEntity(null, "Ulima", "Universidad de Lima", fabrizio));
-   * 
-   * repoR.flush(); repoU.flush(); } }; }
-   */
+
+   /*
+
+  @Bean
+  public CommandLineRunner starterData(final UserRepository repoU, final RoleRepository repoR,
+      final EntityRepository repoE) {
+    return new CommandLineRunner() {
+
+      @Override
+      public void run(final String... args) throws Exception {
+        repoE.deleteAll();
+        repoU.deleteAll();
+        repoR.deleteAll();
+
+        final RoleEntity admin = repoR.save(new RoleEntity(null, "Administrador"));
+        final RoleEntity pro = repoR.save(new RoleEntity(null, "Profesional"));
+
+        final UserEntity marselo = repoU.save(new UserEntity(null, "Marselo", "marcelo@gmail.com", "123", "Inocente",
+            "123456789", "https://www.linkedin.com/in/marcelo-inocente", true, "gaa", pro));
+
+        final UserEntity fabrizio = repoU.save(new UserEntity(null, "Fabrizio", "fabrizio@gmail.com", "123", "MC",
+            "987654321", "https://www.linkedin.com/in/fab", true, "chulls", admin));
+
+        repoE.saveAndFlush(new EntityEntity(null, "Ulima", "Universidad de Lima", marselo));
+        repoE.saveAndFlush(new EntityEntity(null, "Belcorp", "F", marselo));
+        repoE.saveAndFlush(new EntityEntity(null, "DUIS", "Soporte Blackboard :'v", fabrizio));
+        repoE.saveAndFlush(new EntityEntity(null, "Ulima", "Universidad de Lima", fabrizio));
+
+        repoR.flush();
+        repoU.flush();
+      }
+    };
+  }*/
 }
