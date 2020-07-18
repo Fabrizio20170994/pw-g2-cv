@@ -12,3 +12,4 @@ public interface EntityRepository extends JpaRepository<EntityEntity, Long> {
     @Query("SELECT u FROM EntityEntity u WHERE u.user =?1")
     public List<EntityEntity> findUserEntities(UserEntity user);
 }
+

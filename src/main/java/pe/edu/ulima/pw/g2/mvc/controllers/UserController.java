@@ -101,13 +101,13 @@ public class UserController {
   @GetMapping("/admin/user/{id}")
   public String editUserPage(Long id) {
     // TODO: Pagina donde el admin edita el rol y estado de un user
-    return "usuario";
+    return "usuarios";
   }
 
   @PutMapping("/admin/user/{id}/edit")
   public String editUser(Long id) {
     // TODO: editar usuario con id
-    return "usuario";
+    return "usuarios";
   }
 
   @GetMapping(value = "/me")
@@ -119,7 +119,7 @@ public class UserController {
   @GetMapping("/me/edit")
   public String editInfoPage() {
     // TODO: Pagina donde el user edita sus datos
-    return "usuario";
+    return "usuarios";
   }
 
   @PutMapping("/me/edit")
@@ -128,6 +128,6 @@ public class UserController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     UserEntity customUser = (UserEntity) authentication.getPrincipal();
     // TODO: logica para editar usuario
-    return "usuario";
+    return "usuarios";
   }
 }
