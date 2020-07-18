@@ -2,6 +2,7 @@ package pe.edu.ulima.pw.g2.mvc.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -16,16 +17,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.ulima.pw.g2.mvc.dao.entities.RoleEntity;
 import pe.edu.ulima.pw.g2.mvc.dao.entities.UserEntity;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.RoleRepository;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.UserRepository;
 import pe.edu.ulima.pw.g2.mvc.dto.UserDTO;
+import pe.edu.ulima.pw.g2.mvc.forms.EditUserForm;
 
 @Controller
 public class UserController {
@@ -88,26 +93,99 @@ public class UserController {
 
       return new ModelAndView("redirect:/admin/create-user");
     }
-    // TODO: agregar alerta de exito
-    return new ModelAndView("redirect:/me");
+    /* TODO: agregar alerta de exito*/
+    String errores = "no";
+    redirectAttributes.addFlashAttribute("errores", errores);
+    return new ModelAndView("redirect:/admin/users");
   }
 
   @GetMapping("/admin/users")
-  public String getUsers() {
-    // TODO: mostrar lista de usuarios, en cada uno link para editUserPage()
-    return "usuarios";
+  public String getUsers(Model model, @RequestParam(name = "filter", required = false) String filter){
+    //TODO: mostrar la lista de usuarios en usuarios
+    if (filter == null){
+      List<UserEntity> listaUsuarios = userRepository.findAll();
+      int len = listaUsuarios.size();
+      String cuenta = "Total: " + len + " usuarios"; 
+      model.addAttribute("listaUsuarios", listaUsuarios);
+      model.addAttribute("cuenta", cuenta);
+      return "usuarios";
+    }else {
+      if (filter.equals("Ambos")){
+        List<UserEntity> listaUsuarios = userRepository.findAll();
+        int len = listaUsuarios.size();
+        String cuenta = "Total: " + len + " usuarios"; 
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        model.addAttribute("cuenta", cuenta);
+        return "usuarios";        
+      } else if (filter.equals("Activo")){
+        List<UserEntity> listaUsuarios = userRepository.findByActive(true);
+        int len = listaUsuarios.size();
+        String cuenta = "Total: " + len + " usuarios"; 
+        model.addAttribute("cuenta", cuenta);
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        return "usuarios"; 
+      } else {
+        List<UserEntity> listaUsuarios = userRepository.findByActive(false);
+        int len = listaUsuarios.size();
+        String cuenta = "Total: " + len + " usuarios"; 
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        model.addAttribute("cuenta", cuenta);
+        return "usuarios"; 
+      }
+    }
   }
 
   @GetMapping("/admin/user/{id}")
-  public String editUserPage(Long id) {
+  public String editUserPage(@PathVariable String id, Model model) {
     // TODO: Pagina donde el admin edita el rol y estado de un user
-    return "usuarios";
+
+    Long Id = Long.parseLong(id);
+    Optional<UserEntity> opUser = userRepository.findById(Id); 
+    if(opUser.isPresent()){
+      UserEntity user = opUser.get();
+      Long idRole = user.getRole().getId();
+      model.addAttribute("usuarioEditar", user);
+      model.addAttribute("idRole", idRole);
+    }
+    EditUserForm editUserForm = new EditUserForm();
+    model.addAttribute("roles", roleRepository.findAll());
+    model.addAttribute("userId", id);
+    model.addAttribute("UserForm", editUserForm);
+    
+    return "update-user";
+
   }
 
-  @PutMapping("/admin/user/{id}/edit")
-  public String editUser(Long id) {
+  @PostMapping("/admin/user/{id}/edit")
+  public String editUser(@PathVariable String id, EditUserForm editUserForm){
     // TODO: editar usuario con id
-    return "usuarios";
+
+    Long idUser = Long.parseLong(id);
+    Optional<UserEntity> opUser = userRepository.findById(idUser);
+    if(opUser.isPresent()){
+      UserEntity usuario = opUser.get();
+      Optional<RoleEntity> opRole = roleRepository.findById(Long.parseLong(editUserForm.getUser_role()));
+      if(opRole.isPresent()){
+        RoleEntity rol = opRole.get();
+        usuario.setRole(rol);
+        usuario.setActive(Boolean.parseBoolean(editUserForm.getUser_active()));
+        usuario.setNombre(editUserForm.getUser_nombre());
+        usuario.setApellido(editUserForm.getUser_apellido());
+        usuario.setEmail(editUserForm.getUser_email());
+        usuario.setTelefono(editUserForm.getUser_telefono());
+        usuario.setDatosRelevantes(editUserForm.getUser_datosRelevantes());
+        usuario.setLinkedinUrl(editUserForm.getUser_linkedinUrl());
+        usuario.setPassword(editUserForm.getUser_password());
+        userRepository.saveAndFlush(usuario);
+      }
+    }else{
+      System.out.println("No se encuentra usuario para modificacion");
+    }
+    
+    
+    
+    return "redirect:/admin/users";
+
   }
 
   @GetMapping(value = "/me")

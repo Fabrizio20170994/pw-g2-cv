@@ -72,9 +72,10 @@ public class MvcApplication {
         TipoFormacionEntity estudio = repoTF.saveAndFlush(new TipoFormacionEntity(null, "Estudio"));
         TipoFormacionEntity curso = repoTF.saveAndFlush(new TipoFormacionEntity(null, "Curso"));
 
+
         repoF.saveAndFlush(new FormacionEntity(null, "carrera de inge", 2020L, true, estudio, ulima));
         repoF.saveAndFlush(new FormacionEntity(null, "cursillo de ML", 2017L, true, curso, ulima));
       } 
     };
-  } */
+  }*/ 
 }
