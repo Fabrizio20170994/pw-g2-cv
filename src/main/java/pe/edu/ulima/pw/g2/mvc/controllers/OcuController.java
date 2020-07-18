@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,5 +110,29 @@ public class OcuController {
         model.addAttribute("listaOcupaciones", listaOcu);
         model.addAttribute("listaEntidades", listaEntid);
         return "ocupaciones";
+    }
+
+    @GetMapping("/ocupaciones-update/{id}")
+    public String editUserPage(@PathVariable String id, Model model){
+        Optional<OcupationEntity> OpOcupacion = repoOcu.findById(Long.parseLong(id));
+        OcupationEntity ocupacion = OpOcupacion.get();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity customUser = (UserEntity) authentication.getPrincipal();
+        List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
+        int first=1;
+        List<OcupationEntity> listaOcu = null;
+        for (EntityEntity ent : listaEntid){
+            if(first==1){
+                 listaOcu= repoOcu.sacarOcupacionesDeEntidades(ent);
+                first=0;
+            }else{
+                listaOcu.addAll(repoOcu.sacarOcupacionesDeEntidades(ent));
+            }
+             repoOcu.sacarOcupacionesDeEntidades(ent);
+        }
+        model.addAttribute("ocupacion", ocupacion);
+        model.addAttribute("listaOcupaciones", listaOcu);
+        model.addAttribute("listaEntidades", listaEntid);
+        return "ocupaciones-update";
     }
 }
