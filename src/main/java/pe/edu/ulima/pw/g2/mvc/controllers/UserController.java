@@ -164,15 +164,8 @@ public class UserController {
       Optional<RoleEntity> opRole = roleRepository.findById(Long.parseLong(editUserForm.getUser_role()));
       if(opRole.isPresent()){
         RoleEntity rol = opRole.get();
-        usuario.setRole(rol);
+        usuario.setRole(rol);  
         usuario.setActive(Boolean.parseBoolean(editUserForm.getUser_active()));
-        usuario.setNombre(editUserForm.getUser_nombre());
-        usuario.setApellido(editUserForm.getUser_apellido());
-        usuario.setEmail(editUserForm.getUser_email());
-        usuario.setTelefono(editUserForm.getUser_telefono());
-        usuario.setDatosRelevantes(editUserForm.getUser_datosRelevantes());
-        usuario.setLinkedinUrl(editUserForm.getUser_linkedinUrl());
-        usuario.setPassword(editUserForm.getUser_password());
         userRepository.saveAndFlush(usuario);
       }
     }else{

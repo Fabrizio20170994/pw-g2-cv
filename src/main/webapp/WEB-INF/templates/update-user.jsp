@@ -24,13 +24,6 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-md-3 form-group">
-              <input type="hidden" name="user_email" th:value="${usuarioEditar.email}">
-              <input type="hidden" name="user_nombre" th:value="${usuarioEditar.nombre}">
-              <input type="hidden" name="user_password" th:value="${usuarioEditar.password}">
-              <input type="hidden" name="user_apellido" th:value="${usuarioEditar.apellido}">
-              <input type="hidden" name="user_telefono" th:value="${usuarioEditar.telefono}">
-              <input type="hidden" name="user_linkedinUrl" th:value="${usuarioEditar.linkedinUrl}">
-              <input type="hidden" name="user_datosRelevantes" th:value="${usuarioEditar.datosRelevantes}">
               <select name="user_role" class="form-control" id="rol_nuevo">
                 <option 
                   th:each="role : ${roles}" 
