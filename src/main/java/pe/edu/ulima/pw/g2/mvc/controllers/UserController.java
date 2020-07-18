@@ -138,6 +138,7 @@ public class UserController {
   @GetMapping("/admin/user/{id}")
   public String editUserPage(@PathVariable String id, Model model) {
     // TODO: Pagina donde el admin edita el rol y estado de un user
+
     Long Id = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(Id); 
     if(opUser.isPresent()){
@@ -152,11 +153,13 @@ public class UserController {
     model.addAttribute("UserForm", editUserForm);
     
     return "update-user";
+
   }
 
   @PostMapping("/admin/user/{id}/edit")
   public String editUser(@PathVariable String id, EditUserForm editUserForm){
     // TODO: editar usuario con id
+
     Long idUser = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(idUser);
     if(opUser.isPresent()){
@@ -182,6 +185,7 @@ public class UserController {
     
     
     return "redirect:/admin/users";
+
   }
 
   @GetMapping(value = "/me")
@@ -193,7 +197,7 @@ public class UserController {
   @GetMapping("/me/edit")
   public String editInfoPage() {
     // TODO: Pagina donde el user edita sus datos
-    return "usuario";
+    return "usuarios";
   }
 
   @PutMapping("/me/edit")
@@ -202,6 +206,6 @@ public class UserController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     UserEntity customUser = (UserEntity) authentication.getPrincipal();
     // TODO: logica para editar usuario
-    return "usuario";
+    return "usuarios";
   }
 }

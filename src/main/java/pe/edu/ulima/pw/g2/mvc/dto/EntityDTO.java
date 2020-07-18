@@ -1,24 +1,27 @@
 package pe.edu.ulima.pw.g2.mvc.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class EntityDTO {
 
-    @NotNull
+
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(max=250, message="El nombre debe tener máximo 250 caracteres")
     private String nombre;
 
+    @Pattern(regexp = "^\\W*(?:\\w+\\b\\W*){0,20}$", message = "La descripción debe tener máximo 20 palabras")
     private String descripcion;
-
-    @NotNull
-    private Long user;
 
     public EntityDTO() {
     }
 
-    public EntityDTO(@NotNull String nombre, String descripcion, @NotNull Long user) {
+    public EntityDTO(@NotBlank String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.user = user;
     }
 
     public String getNombre() {
@@ -35,14 +38,6 @@ public class EntityDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Long getUser() {
-        return this.user;
-    }
-
-    public void setUser(Long user) {
-        this.user = user;
     }
 
 }

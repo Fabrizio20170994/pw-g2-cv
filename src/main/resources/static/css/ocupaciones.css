@@ -39,3 +39,9 @@ input[type=number]{
     border: 0;
     background-color: transparent;
 }
+.centro{
+    text-align: center;
+}
+.escondido{
+    display: none;
+}
