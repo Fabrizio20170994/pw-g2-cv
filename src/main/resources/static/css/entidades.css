@@ -4,6 +4,7 @@
     border-bottom: solid;
     border-left: solid;
     border-right: solid;
+    min-height: 40px;
 }
 
 .fila1 {
@@ -33,4 +34,18 @@
 
 .fa-pencil-square-o {
     color: black;
+}
+
+.botonVolver {
+    position: absolute;
+    bottom: 10;
+    left: 0;
+    width: 100px;
+}
+
+.columna {
+    min-height: 40px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }

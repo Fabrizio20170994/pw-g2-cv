@@ -26,7 +26,9 @@ public class UserDTO {
   private String telefono;
   private String linkedinUrl;
 
-  public UserDTO() {}
+  public UserDTO() {
+    active = true;
+  }
 
   public UserDTO(@NotNull @NotEmpty String nombre, @NotNull @NotEmpty String email, @NotNull @NotEmpty String password,
       @NotNull @NotEmpty Boolean active, @NotNull Long role, String apellido, String telefono,
