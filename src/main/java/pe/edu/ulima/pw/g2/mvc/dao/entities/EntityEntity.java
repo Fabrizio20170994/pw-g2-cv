@@ -1,5 +1,6 @@
 package pe.edu.ulima.pw.g2.mvc.dao.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,9 @@ public class EntityEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String nombre;
+
     private String descripcion;
 
     @ManyToOne
@@ -58,8 +61,8 @@ public class EntityEntity {
 
     public EntityEntity(Long id, String nombre, String descripcion, UserEntity user) {
         this.id = id;
-        this.setNombre(nombre);
-        this.setDescripcion(descripcion);
+        this.nombre = nombre;
+        this.descripcion = descripcion;
         this.user = user;
     }
 
