@@ -1,5 +1,6 @@
 package pe.edu.ulima.pw.g2.mvc.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,6 +14,7 @@ public class FormacionDTO {
 
   @NotNull
   @Size(max = 250)
+  @NotBlank
   private String detalle;
 
   @NotNull
