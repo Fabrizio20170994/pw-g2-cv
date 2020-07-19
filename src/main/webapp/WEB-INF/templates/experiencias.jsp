@@ -15,11 +15,17 @@
     </div>
     <div class="container espacioArriba">
       <hr/>
-        <div class="row fila" th:each="ent: ${listaEntidades}" th:text="${ent.nombre}">
-          <div class="col fila" th:each="ocu: ${listaOcupaciones}" th:text="${ocu.nombre}">
-            <div class="col fila" th:each="exp: ${listaExperiencias}" th:text="@{exp.logro}">
-            </div>
+        <!--<div class="row fila" th:each="ent: ${listaEntidades}" th:text="${ent.nombre}">
+          <div class="row fila" th:each="ocu: ${listaOcupaciones}" th:text="${ocu.nombre}">
+            <div class="row fila" th:each="exp: ${listaExperiencias}" th:text="${exp.logro}"></div>
           </div>
+        </div>-->
+        <div class="row fila" th:each="exp: ${listaExperiencias}">
+          <div class="col-md-3" th:text="${exp.entidad.nombre}"></div>
+          <div class="col-md-3" th:text="${exp.ocupacion.nombre}"></div>
+          <div class="col-md-3" th:text="${exp.logro}"></div>
+          <div class="col-md-3" th:text="${exp.visibilidad}"></div>
+
         </div>
     </div>
   </body>

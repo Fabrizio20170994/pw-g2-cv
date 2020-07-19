@@ -34,13 +34,15 @@ public class ExperienciasController {
         System.out.println(customUser.getNombre());
         List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
         int first=1;
+        //List<OcupationEntity> listaOcu = null;
         List<OcupationEntity> listaOcu = null;
+        //
         for (EntityEntity ent : listaEntid){
             if(first==1){
-                listaOcu = repoOcu.sacarOcupacionesDeEntidades(ent);
+                listaOcu = repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent);
                 first=0;
             }else{
-                listaOcu.addAll(repoOcu.sacarOcupacionesDeEntidades(ent));
+                listaOcu.addAll(repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent));
             }
             //repoOcu.sacarOcupacionesDeEntidades(ent);
         }

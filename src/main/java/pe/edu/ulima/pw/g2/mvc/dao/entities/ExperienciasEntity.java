@@ -17,14 +17,33 @@ public class ExperienciasEntity {
     private String logro;
 
     private boolean visibilidad;
-
+    
     @ManyToOne
     private OcupationEntity ocupacion;
 
     @ManyToOne
     private EntityEntity entidad;
 
-    ExperienciasEntity() {}
+    
+
+    ExperienciasEntity() {
+    }
+
+    public EntityEntity getEntidad() {
+        return this.entidad;
+    }
+
+    public void setEntidad(EntityEntity entidad) {
+        this.entidad = entidad;
+    }
+
+    public OcupationEntity getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(OcupationEntity ocupacion) {
+        this.ocupacion = ocupacion;
+    }
 
     public Long getId() {
         return id;
