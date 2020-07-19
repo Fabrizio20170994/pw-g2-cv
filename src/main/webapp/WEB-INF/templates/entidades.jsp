@@ -9,7 +9,7 @@
   <title>Entidades</title>
 </head>
 
-<body class="container">
+<body>
 
   <div th:replace="fragments/header :: header"></div>
   <div class="container">
@@ -39,7 +39,7 @@
       <div class="row fila1" th:each="entities: ${entities}">
         <div class="col-md-3 columna" th:text="${entities.nombre}"></div>
         <div class="col-md-8 columna" th:text="${entities.descripcion}"></div>
-        <div class="col-md-1"><a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        <div class="col-md-1"><a th:href="'/entidades/edit/'+${entities.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>
