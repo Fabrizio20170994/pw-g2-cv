@@ -168,7 +168,7 @@
             </div>
             <div class="modal-body">
               <!---->
-              <form method ="PUT" th:action="@{/actualizar_ocupacion}">
+              <form method ="POST" th:action="@{/actualizar_ocupacion}">
                 <div class="container">
                   <div class="row">
                     <div class="form-group col-md-6"> 
@@ -208,6 +208,7 @@
                       <input type="number" class="años form-control" name="anioFOcup" id="anioFOcupU" th:value="${ocupacion.anioF}"/>
                     </div>
                   </div>
+                  <input type="hidden" name="ocuID" th:value="${ocupacion.id}" />
                   <div class="row">
                     <div class="col-md-12 centro">
                       <button type="submit" class="btn btn-success bot-ocup" id="submitCrearU" href="/ocupaciones" disabled >
