@@ -37,14 +37,13 @@ public class ExperienciasController {
         List<OcupationEntity> listaOcu = null;
         for (EntityEntity ent : listaEntid){
             if(first==1){
-                 listaOcu= repoOcu.sacarOcupacionesDeEntidades(ent);
+                listaOcu = repoOcu.sacarOcupacionesDeEntidades(ent);
                 first=0;
             }else{
                 listaOcu.addAll(repoOcu.sacarOcupacionesDeEntidades(ent));
             }
-             //repoOcu.sacarOcupacionesDeEntidades(ent);
+            //repoOcu.sacarOcupacionesDeEntidades(ent);
         }
-        
         first=1;
         List<ExperienciasEntity> listaExp = null;
         for (OcupationEntity ocu : listaOcu){
@@ -58,7 +57,6 @@ public class ExperienciasController {
         model.addAttribute("listaExperiencias", listaExp);
         model.addAttribute("listaOcupaciones", listaOcu);
         model.addAttribute("listaEntidades", listaEntid);
-        return "ocupaciones";
+        return "experiencias";
     }
-
 }
