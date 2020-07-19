@@ -176,7 +176,7 @@
                         Entidad:
                       </label>
                       <select name="entidad_nombre" class="form-control">
-                        <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo</option>
+                        <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}" th:selected="${ocupacion.entidad.id} == ${enti.id}">ejemplo</option>
                       </select>
                     </div>
                     <div class="form-group col-md-6">
