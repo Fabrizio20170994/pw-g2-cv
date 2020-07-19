@@ -42,7 +42,7 @@
           <div class="formacion-desc"><strong>En:</strong> <span th:text="${formacion.entidad.nombre}">Lugar</span></div>
           <div class="formacion-desc"><strong>Año de fin:</strong> <span th:text="${formacion.anioFin}"></span></div>
           <div class="formacion-desc" th:text="${formacion.detalle}"></div>
-          <a href="">
+          <a class="edit-button" th:href="@{/formacion/{id}/edit(id=${formacion.id})}">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </a>
         </li>
