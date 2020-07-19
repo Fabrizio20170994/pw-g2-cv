@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -11,108 +10,57 @@
     <title>Editar formación</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Web</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/mis-datos"
-              >Mis datos<span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/entidades">Entidades</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/ocupaciones">Ocupaciones</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/experiencias">Experiencia</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/formacion">Formación</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/cv">CV</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/usuarios">Usuarios</a>
-            <!--solo se muestra si es admin-->
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/autenticacion"
-              >Iniciar sesión / Mi cuenta</a
-            >
-            <!--si ha iniciado sesion se muestra "mi cuenta"-->
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/autenticacion">Cerrar sesión</a>
-            <!--solo se muestra si ha iniciado sesion-->
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div th:replace="fragments/header :: header"></div>
 
     <div class="container">
-      <h1 style="margin-top: 1rem;">Editar formación</h1>
-      <div class="alert alert-danger" role="alert">
+      <h1 style="margin-top: 1rem;">Actualizar mi formación</h1>
+      <div
+        class="alert alert-danger"
+        role="alert"
+        th:each="error: ${errors}"
+        th:text="${error}">
         El detalle supera los 250 caracteres
       </div>
-      <div class="alert alert-danger" role="alert">
-        El año de fin no es del calendario vigente
-      </div>
-      <div class="alert alert-danger" role="alert">
-        El campo xxxx no ha sido completado correctamente
-      </div>
-      <form>
+      <form th:object="${formacion}" th:action="@{/formacion/{id}/edit(id=${id})}" method="POST">
         <div class="form-group">
           <label for="newTypeSelect">Tipo</label>
-          <select class="form-control select-input" id="newTypeSelect">
-            <option>Estudio</option>
-            <option>Curso</option>
+          <select th:field="*{tipo}" name="tipo" class="form-control select-input" id="newTypeSelect">
+            <option
+              th:each="tipo, iStat : ${tipos}"
+              th:value="${tipo.id}"
+              th:text="${tipo.nombre}"></option>
           </select>
         </div>
         <div class="form-group">
           <label for="entidadSelect">Entidad</label>
-          <select class="form-control select-input" id="entidadSelect">
-            <option>Entidad 1</option>
-            <option>Entidad 2</option>
-            <option>Entidad 3</option>
-            <option>Entidad 4</option>
+          <select th:field="*{entidad}" name="entidad" class="form-control select-input" id="entidadSelect">
+            <option
+              th:each="entidad, iStat : ${entities}"
+              th:value="${entidad.id}"
+              th:text="${entidad.nombre}"></option>
           </select>
         </div>
         <div class="form-group">
           <label for="detalleInput">Detalle</label>
-          <textarea class="form-control" id="detalleInput" rows="3">
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus vero debitis accusamus laboriosam quod illo ex modi esse! Esse voluptatibus illum nam nisi minus id impedit dignissimos eum in voluptas!
+          <textarea
+            th:field="*{detalle}"
+            th:text="${formacion.detalle}"
+            class="form-control"
+            id="detalleInput"
+            rows="3">
           </textarea>
         </div>
         <div class="form-group">
           <label for="yearInput">Año de fin</label>
-          <input
-            type="text"
-            class="form-control select-input"
-            id="yearInput"
-            value="2020"
-          />
+          <input th:field="*{anioFin}" name="anioFin" type="text" class="form-control select-input" id="yearInput" />
         </div>
         <div class="form-group form-check">
           <input
             type="checkbox"
             class="form-check-input"
             id="exampleCheck1"
-            checked
+            th:field="*{visible}"
+            name="visible"
           />
           <label class="form-check-label" for="exampleCheck1">Visible</label>
         </div>

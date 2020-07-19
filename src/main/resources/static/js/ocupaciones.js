@@ -1,13 +1,13 @@
 var hayIntervalo=0;
 
 function verificacion(){
-  var nombre= document.getElementById("nombre_ocup").value;
+  var nombre= document.getElementById("nombre_ocupC").value;
   
-  var descripcion = document.getElementById("descripcionOcup").value;
+  var descripcion = document.getElementById("descripcionOcupC").value;
   
-  var anioI = document.getElementById("anioIOcup").value;
+  var anioI = document.getElementById("anioIOcupC").value;
   
-  var anioF = document.getElementById("anioFOcup").value;
+  var anioF = document.getElementById("anioFOcupC").value;
   
   var errorA=1;
   var errorB=1;
@@ -16,10 +16,10 @@ function verificacion(){
 
   if(nombre!=""){
     if(nombre.length > 250){
-      document.getElementById("excesoNombre").style.display="block";
+      document.getElementById("excesoNombreC").style.display="block";
       errorA=1;
     }else{
-      document.getElementById("excesoNombre").style.display="none";
+      document.getElementById("excesoNombreC").style.display="none";
       errorA=0;
     }
   }
@@ -33,32 +33,32 @@ function verificacion(){
       }
       console.log(espacios);
       if(espacios > 60){
-        document.getElementById("excesoDescripcion").style.display="block";
+        document.getElementById("excesoDescripcionC").style.display="block";
         errorB=1;
       }else{
-        document.getElementById("excesoDescripcion").style.display="none";
+        document.getElementById("excesoDescripcionC").style.display="none";
         errorB=0;
       }
     }else{
       errorB=0;
-      document.getElementById("excesoDescripcion").style.display="none";
+      document.getElementById("excesoDescripcionC").style.display="none";
     }
   }
   
   if(anioI!="" && anioF!=""){
     if(( anioI <= 2020) && (anioF <= 2020)){
-      document.getElementById("fallaAnios").style.display="none";
+      document.getElementById("fallaAniosC").style.display="none";
       errorC=0;
     }else{
-      document.getElementById("fallaAnios").style.display="block";
+      document.getElementById("fallaAniosC").style.display="block";
       errorC=1;
     }
     if(anioF>=anioI){
       errorD=0;
-      document.getElementById("anioImayor").style.display="none"
+      document.getElementById("anioImayorC").style.display="none"
     }else{
       errorD=1;
-      document.getElementById("anioImayor").style.display="block"
+      document.getElementById("anioImayorC").style.display="block"
     }
   }
   console.log(errorA);
@@ -66,15 +66,16 @@ function verificacion(){
   console.log(errorC);
   console.log(errorD);
   if(errorA+errorB+errorC+errorD==0){
-    document.getElementById("submitCrear").disabled=false;
+    document.getElementById("submitCrearC").disabled=false;
   }else{
-    document.getElementById("submitCrear").disabled=true;
+    document.getElementById("submitCrearC").disabled=true;
   }
 }
 
 var main=function(){
   if(hayIntervalo==0){
-    var intervalo = window.setInterval(verificacion,1000);
+    var intervalo = window.setInterval(verificacion,100);
   }
 }
 
+window.onload = main;
