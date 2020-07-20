@@ -1,11 +1,13 @@
 package pe.edu.ulima.pw.g2.mvc.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -16,6 +18,7 @@ import pe.edu.ulima.pw.g2.mvc.dao.entities.UserEntity;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.EntityRepository;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.ExperienciasRepository;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.OcupationRepository;
+import pe.edu.ulima.pw.g2.mvc.forms.ExperienciaForm;
 
 @Controller
 public class ExperienciasController {
@@ -60,5 +63,26 @@ public class ExperienciasController {
         model.addAttribute("listaOcupaciones", listaOcu);
         model.addAttribute("listaEntidades", listaEntid);
         return "experiencias";
+    }
+
+    @PostMapping("/crear-experiencia")
+    public String crearOcupacion(ExperienciaForm formita, Model model){
+        ExperienciasEntity experiencia = new ExperienciasEntity();
+        Long ocupacionId = Long.parseLong(formita.getId_ocupacion());
+        Optional<OcupationEntity> OpOcupacion = repoOcu.findById(ocupacionId);
+        experiencia.setLogro(formita.getLogro());
+        experiencia.setVisibilidad(Boolean.parseBoolean(formita.getVisibilidad()));
+        if(OpOcupacion.isPresent()){
+            OcupationEntity ocupacion = OpOcupacion.get();
+            experiencia.setOcupacion(ocupacion);
+            Long entidadId = ocupacion.getEntidad().getId();
+            Optional<EntityEntity> OpEntidad = repoEnt.findById(entidadId);
+            if(OpEntidad.isPresent()){
+                experiencia.setEntidad(OpEntidad.get());
+                repoExp.saveAndFlush(experiencia);
+            }
+        }
+        
+        return "redirect:/experiencias";
     }
 }

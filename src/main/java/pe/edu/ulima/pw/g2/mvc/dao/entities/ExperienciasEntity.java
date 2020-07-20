@@ -26,7 +26,7 @@ public class ExperienciasEntity {
 
     
 
-    ExperienciasEntity() {
+    public ExperienciasEntity() {
     }
 
     public EntityEntity getEntidad() {
