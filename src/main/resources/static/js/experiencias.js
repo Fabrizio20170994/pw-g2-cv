@@ -5,4 +5,7 @@ function redireccionar(entidadId){
 function verifacacionCrearExperiencia(){
     error=1;
     var nombre=document.getElementById("logro");
+    if(nombre.getvalue()){
+        
+    }
 }
