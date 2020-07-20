@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -32,10 +36,18 @@ public class ExperienciasController {
     private ExperienciasRepository repoExp;
 
     @GetMapping("/experiencias")
-    public String cargarOcupaciones(Model model){
+    public String cargarOcupaciones(Model model, @RequestParam(required = false) Long page){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity customUser = (UserEntity) authentication.getPrincipal();
-        List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
+
+        if (page == null) {
+            page = 1L;
+        }
+        Pageable pageObject = PageRequest.of(page.intValue() - 1, 3);
+        Page<EntityEntity> pagina = repoEnt.findUserEntitiesPagination(customUser, pageObject); // CON ESTO SACAS SI ES LA ULTIMA, EL NUMERO, TODO ESO
+
+        List<EntityEntity> listaEntid = pagina.getContent();
+
         int first=1;
         //List<OcupationEntity> listaOcu = null;
         List<OcupationEntity> listaOcu = null;
