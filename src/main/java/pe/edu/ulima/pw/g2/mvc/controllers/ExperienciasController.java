@@ -162,15 +162,29 @@ public class ExperienciasController {
     }
 
     @GetMapping("/actualizar-actualizar-experiencia/{EntID}/{ExpID}")
-    public String actDeAct(@PathVariable String EntID, @PathVariable String ExpID, Model model){
+    public String actDeAct(@PathVariable String EntID, @PathVariable String ExpID, Model model, @RequestParam(required = false) Long page){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity customUser = (UserEntity) authentication.getPrincipal();
+        //-
+        List<EntityEntity> listaCompletaEntidades = repoEnt.findUserEntities(customUser);
+        double tamaño = (listaCompletaEntidades.size()/3.0);
+        
+        int paginas = (int) Math.ceil(tamaño);
+
+        if (page == null) {
+            page = 1L;
+        }
+        Pageable pageObject = PageRequest.of(page.intValue() - 1, 3);
+        Page<EntityEntity> pagina = repoEnt.findUserEntitiesPagination(customUser, pageObject); // CON ESTO SACAS SI ES LA ULTIMA, EL NUMERO, TODO ESO
+
+        List<EntityEntity> listaEntid = pagina.getContent();
+        //-
         Long IDEnt = Long.parseLong(EntID);
         Optional<EntityEntity> OpEntidadFiltrada = repoEnt.findById(IDEnt);
         int first=1;
-        List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
+        List<EntityEntity> listaEntidad = repoEnt.findUserEntities(customUser);
         List<OcupationEntity> listaOcu = null;
-        for (EntityEntity ent : listaEntid){
+        for (EntityEntity ent : listaEntidad){
             if(first==1){
                 listaOcu = repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent);
                 first=0;
@@ -197,10 +211,19 @@ public class ExperienciasController {
         Long IDExp = Long.parseLong(ExpID);
         Optional<ExperienciasEntity> OpExp = repoExp.findById(IDExp);
         ExperienciasEntity Exp = OpExp.get();
+        //-
+        Long paginaSiguiente=Long.valueOf(page.intValue()+1);
+        Long paginaAnterior=Long.valueOf(page.intValue()-1);
+        model.addAttribute("pagAnterior", paginaAnterior);
+        model.addAttribute("pagSiguiente", paginaSiguiente);
+        model.addAttribute("totalPaginas", paginas);
+        model.addAttribute("paginaActual", page.intValue());
+        model.addAttribute("entidades", listaEntid);
+        //-
         model.addAttribute("experiencia", Exp);
         model.addAttribute("listaExperiencias", listaExp);
         model.addAttribute("listaOcupaciones", listaOcu);
-        model.addAttribute("listaEntidades", listaEntid);
+        model.addAttribute("listaEntidades", listaEntidad);
         model.addAttribute("listaOcupacionesFiltrada", listaOcuFiltrada);
         model.addAttribute("entidadID", entidadFiltrada);
         return "experienciasUpdateRecargado";

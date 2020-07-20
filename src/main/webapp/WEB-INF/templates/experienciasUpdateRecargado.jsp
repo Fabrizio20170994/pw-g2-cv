@@ -12,6 +12,7 @@
       <button data-toggle="modal" data-target="#crear" id="modalCrear" class="btn btn-success" type="button">Crear Nueva Experiencia</button>
     </div>
     <hr/>
+    <!--
     <div class="container contenido">
       <div class="row fila1">
         <div class="col-md-3">Entidad</div>
@@ -30,6 +31,30 @@
           <div class="col-md-2" th:text="${exp.visibilidad}"></div>
           <a class="col-md-1" th:href="'/ExperienciasUpdate/'+${exp.id}">actualizar</a>
         </div>
+    </div>
+    -->
+    <div class="container contenido">
+      <div th:each="entidad, iStat : ${entidades}" class="entidad">
+        <h1 th:text="${entidad.nombre}"></h1>
+        <div class="contenedor-ocupación">
+          <div th:each="ocupacion, iStat : ${entidad.ocupaciones}" class="ocupacion">
+            <h3 th:text="${ocupacion.nombre}"></h3>
+              <div th:each="experiencia, iStat: ${ocupacion.experiencias}" class="experiencia row">
+                <div th:text="${experiencia.logro}" class="col"></div>
+                <div th:text="${experiencia.visibilidad}" class="col"></div>
+                <a class="col" th:href="'/ExperienciasUpdate/'+${experiencia.id}">Actualizar</a>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" th:if="${paginaActual} &gt; 1" th:href="@{'/experiencias'(page=${pagAnterior})}">Previous</a></li>
+            <li class="page-item"><a class="page-link" th:if="${paginaActual} &lt; ${totalPaginas}" th:href="@{'/experiencias'(page=${pagSiguiente})}">Next</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
     <!---->
 
