@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,7 +35,6 @@ public class ExperienciasController {
     public String cargarOcupaciones(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity customUser = (UserEntity) authentication.getPrincipal();
-        System.out.println(customUser.getNombre());
         List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
         int first=1;
         //List<OcupationEntity> listaOcu = null;
@@ -64,6 +64,50 @@ public class ExperienciasController {
         model.addAttribute("listaEntidades", listaEntid);
         return "experiencias";
     }
+
+
+    @GetMapping("/actualizar-crear-experiencia/{idEntidad}")
+    public String actualizarCrearExperiencia(@PathVariable String idEntidad, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity customUser = (UserEntity) authentication.getPrincipal();
+        Long idENt = Long.parseLong(idEntidad);
+        Optional<EntityEntity> OpEntidadFiltrada = repoEnt.findById(Long.parseLong(idEntidad));
+        int first=1;
+        List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
+        List<OcupationEntity> listaOcu = null;
+        for (EntityEntity ent : listaEntid){
+            if(first==1){
+                listaOcu = repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent);
+                first=0;
+            }else{
+                listaOcu.addAll(repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent));
+            }
+            //repoOcu.sacarOcupacionesDeEntidades(ent);
+        }
+        first=1;
+        List<ExperienciasEntity> listaExp = null;
+        for (OcupationEntity ocu : listaOcu){
+            if(first ==1){
+                listaExp = repoExp.sacarExperienciasDeOcupaciones(ocu);
+                first =0;
+            }else{
+                listaExp.addAll(repoExp.sacarExperienciasDeOcupaciones(ocu));
+            }
+        }
+        List<OcupationEntity> listaOcuFiltrada = null;
+        if(OpEntidadFiltrada.isPresent()){
+            
+            EntityEntity entidadFiltrada = OpEntidadFiltrada.get();
+            listaOcuFiltrada = repoOcu.sacarOcupacionesDeEntidades(entidadFiltrada);
+        }
+        model.addAttribute("listaExperiencias", listaExp);
+        model.addAttribute("listaOcupaciones", listaOcu);
+        model.addAttribute("listaEntidades", listaEntid);
+        model.addAttribute("listaOcupacionesFiltrada", listaOcuFiltrada);
+        model.addAttribute("entidadID", idENt);
+        return "experienciasCrear";
+    }
+
 
     @PostMapping("/crear-experiencia")
     public String crearOcupacion(ExperienciaForm formita, Model model){

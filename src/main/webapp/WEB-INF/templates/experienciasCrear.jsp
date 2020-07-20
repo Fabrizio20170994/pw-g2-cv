@@ -51,8 +51,8 @@
                       Entidad:
                     </label>
                     <select name="entidad_nombre" class="form-control" onchange="redireccionar(this.value)">
-                      <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
-                        <a th:href="'/actualizar-crear-experiencia/'+${enti.id}" type="hidden" id="${enti.id}"></a>
+                      <option th:each="enti:${listaEntidades}" th:selected="${entidadID} == ${enti.id}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
+                        <a th:href="'/actualizar-crear-experiencia/'+${enti.id}" type="hidden" th:id="${enti.id}"></a>
                       </option>
                     </select>
                   </div>
@@ -61,8 +61,8 @@
                       Ocupación
                     </label>
                     <select name="id_ocupacion" class="form-control">
-                      <!--<option th:each="ocup :${listaOcupaciones}" th:text="${ocup.nombre}" th:value="${ocup.id}">ejemplo
-                      </option>-->
+                      <option th:each="ocup :${listaOcupacionesFiltrada}" th:text="${ocup.nombre}" th:value="${ocup.id}">ejemplo
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -124,5 +124,8 @@
       crossorigin="anonymous"
     ></script>
     <script src="/js/experiencias.js"></script>
+    <script>
+      $('#crear').modal('toggle')
+    </script>
   </body>
 </html>
