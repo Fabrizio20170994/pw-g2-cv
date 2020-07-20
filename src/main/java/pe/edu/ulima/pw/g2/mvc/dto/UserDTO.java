@@ -25,14 +25,23 @@ public class UserDTO {
   private String apellido;
   private String telefono;
   private String linkedinUrl;
+  private String datosRelevantes;
 
   public UserDTO() {
     active = true;
   }
 
+  public String getDatosRelevantes() {
+    return datosRelevantes;
+  }
+
+  public void setDatosRelevantes(String datosRelevantes) {
+    this.datosRelevantes = datosRelevantes;
+  }
+
   public UserDTO(@NotNull @NotEmpty String nombre, @NotNull @NotEmpty String email, @NotNull @NotEmpty String password,
       @NotNull @NotEmpty Boolean active, @NotNull Long role, String apellido, String telefono,
-      String linkedinUrl) {
+      String linkedinUrl, String datosRelevantes) {
     this.nombre = nombre;
     this.email = email;
     this.password = password;
@@ -41,6 +50,7 @@ public class UserDTO {
     this.apellido = apellido;
     this.telefono = telefono;
     this.linkedinUrl = linkedinUrl;
+    this.datosRelevantes = datosRelevantes;
   }
 
   public String getLinkedinUrl() {
