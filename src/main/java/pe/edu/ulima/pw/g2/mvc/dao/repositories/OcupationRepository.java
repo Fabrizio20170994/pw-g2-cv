@@ -13,6 +13,10 @@ public interface OcupationRepository extends JpaRepository<OcupationEntity, Long
     @Query("SELECT u FROM OcupationEntity u WHERE u.entidad = ?1")
     public List<OcupationEntity> sacarOcupacionesDeEntidades(EntityEntity entidad);
 
+    @Query("Select u FROM OcupationEntity u WHERE u.entidad = ?1 ORDER BY u.anioF DESC")
+    public List<OcupationEntity> sacarOcupacionesDeEntidadesOrdenadas(EntityEntity entidad);
+
     @Query("SELECT o FROM OcupationEntity o WHERE o.entidad.user = ?1 ORDER BY o.anioF DESC")
     public List<OcupationEntity> findOcupacionesByUser(UserEntity user);
+
 }
