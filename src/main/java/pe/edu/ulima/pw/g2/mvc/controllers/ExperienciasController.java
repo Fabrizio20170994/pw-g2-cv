@@ -59,6 +59,9 @@ public class ExperienciasController {
                 listaExp.addAll(repoExp.sacarExperienciasDeOcupaciones(ocu));
             }
         }
+        first=1;
+        List<OcupationEntity> listaOcuFiltrada = repoOcu.sacarOcupacionesDeEntidades(listaEntid.get(0));
+        model.addAttribute("listaOcupacionesFiltrada", listaOcuFiltrada);
         model.addAttribute("listaExperiencias", listaExp);
         model.addAttribute("listaOcupaciones", listaOcu);
         model.addAttribute("listaEntidades", listaEntid);

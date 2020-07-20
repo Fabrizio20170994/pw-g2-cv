@@ -9,7 +9,7 @@
   <body>
     <div th:replace="fragments/header :: header"></div>
     <div class="container contenido">
-      <button data-toggle="modal" data-target="#crear" id="modalCrear" class="btn btn-success" type="button">Crear Nueva Experiencia</button>
+      <button data-toggle="modal" data-target="#crear" id="modalCrear" class="btn btn-success marginArriba" type="button">Crear Nueva Experiencia</button>
     </div>
     <hr/>
     <div class="container contenido">
@@ -61,8 +61,8 @@
                       Ocupación
                     </label>
                     <select name="id_ocupacion" class="form-control">
-                      <!--<option th:each="ocup :${listaOcupaciones}" th:text="${ocup.nombre}" th:value="${ocup.id}">ejemplo
-                      </option>-->
+                      <option th:each="ocup :${listaOcupacionesFiltrada}" th:text="${ocup.nombre}" th:value="${ocup.id}">ejemplo
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -90,17 +90,8 @@
                 </div>
               </div>
             </form>
-            <div class="alert alert-danger escondido" role="alert" id="fallaAniosC">
-              Los años no cuadran
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="excesoDescripcionC">
-              Descripcion supera las 30 palabras
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="excesoNombreC">
-              Nombre supera los 250 caracteres
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="anioImayorC">
-              El año final es menor al inicial
+            <div class="alert alert-danger escondido" role="alert" id="fallaLogro">
+              hay mas de 30 palabras en el logro
             </div>
           <!---->
           </div>

@@ -90,17 +90,8 @@
                 </div>
               </div>
             </form>
-            <div class="alert alert-danger escondido" role="alert" id="fallaAniosC">
-              Los años no cuadran
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="excesoDescripcionC">
-              Descripcion supera las 30 palabras
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="excesoNombreC">
-              Nombre supera los 250 caracteres
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="anioImayorC">
-              El año final es menor al inicial
+            <div class="alert alert-danger escondido" role="alert" id="fallaLogro">
+              hay mas de 30 palabras en el logro
             </div>
           <!---->
           </div>
