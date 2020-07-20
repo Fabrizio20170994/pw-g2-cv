@@ -65,6 +65,7 @@ public class ExperienciasController {
         model.addAttribute("listaExperiencias", listaExp);
         model.addAttribute("listaOcupaciones", listaOcu);
         model.addAttribute("listaEntidades", listaEntid);
+        model.addAttribute("entidades", listaEntid);
         return "experiencias";
     }
 

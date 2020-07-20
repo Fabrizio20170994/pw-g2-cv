@@ -48,3 +48,73 @@ input[type=number]{
 .marginArriba{
     margin-top: 1.5rem;
 }
+
+
+.fila{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+}
+.fila1{
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border: solid;
+}
+#titulo{
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+.bot-ocup{
+    margin-bottom: 1em;
+    margin-right: 2em;
+}
+.bot-filt{
+    width: 10em;
+}
+.input-text-area{
+    width: 100%;
+    height: 5em;
+}
+input[type=number]{
+    width: 85%;
+}
+.text{
+    width: 85%;
+}
+.ent{
+    width: 85%;
+}
+.upd{
+    font-size: small;
+    border: 0;
+    background-color: transparent;
+}
+.centro{
+    text-align: center;
+}
+.escondido{
+    display: none;
+}
+
+.entidad {
+    border: 3px solid;
+    margin: 10px;
+    padding: 15px;
+}
+.ocupacion {
+    padding-left: 10px;
+    border: 1.5px solid;
+    margin: 15px;
+}
+
+.experiencia {
+    padding-left: 100px;
+    font-weight: 600;
+    margin: 5px;
+}
+
+.contenedor-ocupación {
+    padding-left: 100px;
+}
