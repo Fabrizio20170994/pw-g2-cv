@@ -20,14 +20,6 @@
           />
         </div>
         <div class="col-md-8">
-          <!--<h4>Nombre:</h4>
-        <h6>Fabricio Sotelo Parra</h6>
-        <h4>Correo:</h4>
-        <h6>FabricioSot@correoexample.com</h6>
-        <h4>Rol:</h4>
-        <h6>Usuario</h6>
-        <h4>Estado:</h4>
-        <h6>Activo</h6>-->
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <h4>Nombre:</h4>

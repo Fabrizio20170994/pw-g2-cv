@@ -13,6 +13,6 @@ public interface FormacionRepository extends JpaRepository<FormacionEntity, Long
   @Query("SELECT f FROM FormacionEntity f WHERE f.entidad.user = ?1 AND f.tipo.id = ?2")
   public List<FormacionEntity> findByUserAndTypeId(UserEntity user, Long idTipo);
 
-  @Query("SELECT f FROM FormacionEntity f WHERE f.entidad.user = ?1")
+  @Query("SELECT f FROM FormacionEntity f WHERE f.entidad.user = ?1 ORDER BY f.anioFin DESC")
   public List<FormacionEntity> findByUser(UserEntity user);
 }

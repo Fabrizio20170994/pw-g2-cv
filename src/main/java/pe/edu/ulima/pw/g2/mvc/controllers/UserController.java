@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,6 +44,16 @@ public class UserController {
 
   @Autowired
   private RoleRepository roleRepository;
+
+  @PostConstruct
+  public void initialize() {
+    modelMapper.addMappings(new PropertyMap<UserEntity, UserDTO>() {
+      @Override
+      protected void configure() {
+        skip(destination.getRole());
+      }
+    });
+  }
   
   @GetMapping("/admin/create-user")
   public String newUserForm(WebRequest request, Model model) {
@@ -93,7 +104,6 @@ public class UserController {
 
       return new ModelAndView("redirect:/admin/create-user");
     }
-    /* TODO: agregar alerta de exito*/
     String errores = "no";
     redirectAttributes.addFlashAttribute("errores", errores);
     return new ModelAndView("redirect:/admin/users");
@@ -101,7 +111,6 @@ public class UserController {
 
   @GetMapping("/admin/users")
   public String getUsers(Model model, @RequestParam(name = "filter", required = false) String filter){
-    //TODO: mostrar la lista de usuarios en usuarios
     if (filter == null){
       List<UserEntity> listaUsuarios = userRepository.findAll();
       int len = listaUsuarios.size();
@@ -137,7 +146,6 @@ public class UserController {
 
   @GetMapping("/admin/user/{id}")
   public String editUserPage(@PathVariable String id, Model model) {
-    // TODO: Pagina donde el admin edita el rol y estado de un user
     Long Id = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(Id); 
     if(opUser.isPresent()){
@@ -157,7 +165,6 @@ public class UserController {
 
   @PostMapping("/admin/user/{id}/edit")
   public String editUser(@PathVariable String id, EditUserForm editUserForm){
-    // TODO: editar usuario con id
     Long idUser = Long.parseLong(id);
     Optional<UserEntity> opUser = userRepository.findById(idUser);
     if(opUser.isPresent()){
@@ -181,22 +188,43 @@ public class UserController {
 
   @GetMapping(value = "/me")
   public String accountPage(Model model) {
-    // El usuario actual se obtiene en la vista
     return "mi-cuenta";
   }
 
-  @GetMapping("/me/edit")
-  public String editInfoPage() {
-    // TODO: Pagina donde el user edita sus datos
-    return "usuarios";
+  @GetMapping("/mis-datos")
+  public String editInfoPage(WebRequest request, Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    UserEntity currentUser = (UserEntity) authentication.getPrincipal();
+
+    UserDTO userDto;
+
+    if (model.getAttribute("user") != null) {
+      userDto = (UserDTO) model.getAttribute("user");
+    } else {
+      userDto = modelMapper.map(currentUser, UserDTO.class);
+    }
+    model.addAttribute("user", userDto);
+
+    return "mis-datos";
   }
 
-  @PutMapping("/me/edit")
-  public String editMydata(Long id) {
-    // El usuario actualmente logueado se obtiene asi:
+  @PostMapping("/mis-datos")
+  public String editMydata(@ModelAttribute("user") UserDTO userDto,
+    Model model, final RedirectAttributes redirectAttributes) {
+
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    UserEntity customUser = (UserEntity) authentication.getPrincipal();
-    // TODO: logica para editar usuario
-    return "usuarios";
+    UserEntity currentUser = (UserEntity) authentication.getPrincipal();
+    
+    currentUser.setNombre(userDto.getNombre());
+    currentUser.setApellido(userDto.getApellido());
+    currentUser.setTelefono(userDto.getTelefono());
+    currentUser.setLinkedinUrl(userDto.getLinkedinUrl());
+    currentUser.setDatosRelevantes(userDto.getDatosRelevantes());
+    
+    userRepository.saveAndFlush(currentUser);
+
+    model.addAttribute("success", true);
+
+    return "mis-datos";
   }
 }
