@@ -40,6 +40,11 @@ public class ExperienciasController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity customUser = (UserEntity) authentication.getPrincipal();
 
+        List<EntityEntity> listaCompletaEntidades = repoEnt.findUserEntities(customUser);
+        double tamaño = (listaCompletaEntidades.size()/3.0);
+
+        int paginas = (int) Math.ceil(tamaño);
+
         if (page == null) {
             page = 1L;
         }
@@ -73,6 +78,14 @@ public class ExperienciasController {
         }
         first=1;
         List<OcupationEntity> listaOcuFiltrada = repoOcu.sacarOcupacionesDeEntidades(listaEntid.get(0));
+        Long paginaSiguiente=Long.valueOf(page.intValue()+1);
+        Long paginaAnterior=Long.valueOf(page.intValue()-1);
+        System.out.println(paginaSiguiente);
+        System.out.println(paginaAnterior);
+        model.addAttribute("pagAnterior", paginaAnterior);
+        model.addAttribute("pagSiguiente", paginaSiguiente);
+        model.addAttribute("totalPaginas", paginas);
+        model.addAttribute("paginaActual", page.intValue());
         model.addAttribute("listaOcupacionesFiltrada", listaOcuFiltrada);
         model.addAttribute("listaExperiencias", listaExp);
         model.addAttribute("listaOcupaciones", listaOcu);
