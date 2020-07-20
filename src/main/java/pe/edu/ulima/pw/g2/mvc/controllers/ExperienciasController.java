@@ -89,7 +89,7 @@ public class ExperienciasController {
         model.addAttribute("listaOcupacionesFiltrada", listaOcuFiltrada);
         model.addAttribute("listaExperiencias", listaExp);
         model.addAttribute("listaOcupaciones", listaOcu);
-        model.addAttribute("listaEntidades", listaEntid);
+        model.addAttribute("listaEntidades", listaCompletaEntidades);
         return "experiencias";
     }
 
