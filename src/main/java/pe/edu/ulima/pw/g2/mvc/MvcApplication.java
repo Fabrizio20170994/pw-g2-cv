@@ -12,6 +12,7 @@ import pe.edu.ulima.pw.g2.mvc.dao.entities.RoleEntity;
 import pe.edu.ulima.pw.g2.mvc.dao.entities.TipoFormacionEntity;
 import pe.edu.ulima.pw.g2.mvc.dao.entities.UserEntity;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.EntityRepository;
+import pe.edu.ulima.pw.g2.mvc.dao.repositories.ExperienciasRepository;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.FormacionRepository;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.OcupationRepository;
 import pe.edu.ulima.pw.g2.mvc.dao.repositories.RoleRepository;
@@ -34,21 +35,23 @@ public class MvcApplication {
    * Descomentar el metodo de abajo, importar todo y correrlo una vez para limpiar
    * la db y crear la data de prueba. Agrega lo que creas conveniente
    */
-  
-  /* @Bean
+  /*
+   @Bean
   public CommandLineRunner starterData(final UserRepository repoU,
     final RoleRepository repoR, final EntityRepository repoE, TipoFormacionRepository repoTF,
-    FormacionRepository repoF, OcupationRepository repoO) {
+    FormacionRepository repoF, OcupationRepository repoO, ExperienciasRepository repoEx) {
     
     return new CommandLineRunner() {
   
       @Override public void run(final String... args) throws Exception {
         repoF.deleteAll();
         repoTF.deleteAll();
+        repoEx.deleteAll();
         repoO.deleteAll();
         repoE.deleteAll();
         repoU.deleteAll();
         repoR.deleteAll();
+
         
         final RoleEntity admin = repoR.saveAndFlush(new RoleEntity(null, "Administrador"));
         final RoleEntity pro = repoR.saveAndFlush(new RoleEntity(null, "Profesional"));
@@ -66,7 +69,7 @@ public class MvcApplication {
         EntityEntity ulima = repoE.saveAndFlush(new EntityEntity(null, "Ulima", "Universidad de Lima", marselo));
         repoE.saveAndFlush(new EntityEntity(null, "Belcorp", "F", marselo));
         repoE.saveAndFlush(new EntityEntity(null, "DUIS", "Soporte Blackboard :'v", fabrizio));
-        repoE.saveAndFlush(new EntityEntity(null, "Ulima", "Universidad de Lima", fabrizio));
+
 
         // formaciones
         TipoFormacionEntity estudio = repoTF.saveAndFlush(new TipoFormacionEntity(null, "Estudio"));
@@ -77,5 +80,5 @@ public class MvcApplication {
         repoF.saveAndFlush(new FormacionEntity(null, "cursillo de ML", 2017L, true, curso, ulima));
       } 
     };
-  }*/ 
+  } */
 }
