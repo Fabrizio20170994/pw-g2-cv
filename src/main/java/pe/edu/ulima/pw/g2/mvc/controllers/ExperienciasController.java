@@ -129,7 +129,66 @@ public class ExperienciasController {
                 repoExp.saveAndFlush(experiencia);
             }
         }
-        
+        return "redirect:/experiencias";
+    }
+
+    @GetMapping("/ExperienciasUpdate/{ExpID}")
+    public String actualizarOcupacion(@PathVariable String ExpID, Model model){
+        Optional<ExperienciasEntity> OpExperiencia = repoExp.findById(Long.parseLong(ExpID));
+        ExperienciasEntity experiencia = OpExperiencia.get();
+        model.addAttribute("experiencia", experiencia);
+//
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity customUser = (UserEntity) authentication.getPrincipal();
+        List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
+        int first=1;
+        //List<OcupationEntity> listaOcu = null;
+        List<OcupationEntity> listaOcu = null;
+        //
+        for (EntityEntity ent : listaEntid){
+            if(first==1){
+                listaOcu = repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent);
+                first=0;
+            }else{
+                listaOcu.addAll(repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent));
+            }
+            //repoOcu.sacarOcupacionesDeEntidades(ent);
+        }
+        first=1;
+        List<ExperienciasEntity> listaExp = null;
+        for (OcupationEntity ocu : listaOcu){
+            if(first ==1){
+                listaExp = repoExp.sacarExperienciasDeOcupaciones(ocu);
+                first =0;
+            }else{
+                listaExp.addAll(repoExp.sacarExperienciasDeOcupaciones(ocu));
+            }
+        }
+        first=1;
+        List<OcupationEntity> listaOcuFiltrada = repoOcu.sacarOcupacionesDeEntidades(experiencia.getEntidad());
+        model.addAttribute("listaOcupacionesFiltrada", listaOcuFiltrada);
+        model.addAttribute("listaExperiencias", listaExp);
+        model.addAttribute("listaOcupaciones", listaOcu);
+        model.addAttribute("listaEntidades", listaEntid);
+//
+
+        return "experienciasUpdate";
+    }
+    @PostMapping("/actualizar-experiencia/{ExpID}")
+    public String actualizar(ExperienciaForm formita, @PathVariable String ExpID, Model model){
+        Optional<ExperienciasEntity> OpExperiencia = repoExp.findById(Long.parseLong(ExpID));
+        if(OpExperiencia.isPresent()){
+            ExperienciasEntity experiencia =OpExperiencia.get();
+            Long IdOcup = Long.parseLong(formita.getId_ocupacion());
+            Optional<OcupationEntity> OpOcupacion = repoOcu.findById(IdOcup);
+            OcupationEntity ocupacion = OpOcupacion.get();
+            experiencia.setOcupacion(ocupacion);
+            experiencia.setEntidad(ocupacion.getEntidad());
+            experiencia.setLogro(formita.getLogro());
+            experiencia.setVisibilidad(Boolean.parseBoolean(formita.getVisibilidad()));
+
+            repoExp.saveAndFlush(experiencia);
+        }
         return "redirect:/experiencias";
     }
 }

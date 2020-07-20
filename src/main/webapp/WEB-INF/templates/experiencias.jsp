@@ -27,7 +27,8 @@
           <div class="col-md-3" th:text="${exp.entidad.nombre}"></div>
           <div class="col-md-3" th:text="${exp.ocupacion.nombre}"></div>
           <div class="col-md-3" th:text="${exp.logro}"></div>
-          <div class="col-md-3" th:text="${exp.visibilidad}"></div>
+          <div class="col-md-2" th:text="${exp.visibilidad}"></div>
+          <a class="col-md-1" th:href="'/ExperienciasUpdate/'+${exp.id}">actualizar</a>
         </div>
     </div>
     <!---->
@@ -52,7 +53,6 @@
                     </label>
                     <select name="entidad_nombre" class="form-control" onchange="redireccionar(this.value)">
                       <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
-                        <a th:href="'/actualizar-crear-experiencia/'+${enti.id}" type="hidden" id="${enti.id}"></a>
                       </option>
                     </select>
                   </div>
