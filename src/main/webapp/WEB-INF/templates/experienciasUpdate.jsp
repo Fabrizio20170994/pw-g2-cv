@@ -32,7 +32,8 @@
         </div>
     </div>
     <!---->
-    <!--MODAL CREACION-->
+
+<!--MODAL CREACION-->
     <div class="modal fade alert" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -52,7 +53,7 @@
                       Entidad:
                     </label>
                     <select name="entidad_nombre" class="form-control" onchange="redireccionar(this.value)">
-                      <option th:each="enti:${listaEntidades}" th:selected="${entidadID} == ${enti.id}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
+                      <option th:each="enti:${listaEntidades}" th:selected="${experiencia.entidad.id} == ${enti.id}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
                       </option>
                     </select>
                   </div>
@@ -71,7 +72,7 @@
                     <label for="exp">
                       Nombre del logro:
                     </label>
-                    <input type="text" class="text form-control" id="logro" name="logro"/>
+                    <input type="text" class="form-control" id="logro" name="logro"/>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="exp">Visibilidad:</label>
@@ -99,6 +100,77 @@
       </div>
     </div>
     <!--FIN MODAL CREACION-->
+
+    <!--MODAL UPDATE-->
+    <div class="modal fade alert" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Actualizar Experiencia</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" href="/experiencias">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!---->
+            <form method ="POST" th:action="@{'/actualizar-experiencia/'+${experiencia.id}}">
+              <div class="container">
+                <div class="row">
+                  <div class="form-group col-md-6"> 
+                    <label for = "exp">
+                      Entidad:
+                    </label>
+                    <input type="hidden" th:value="${experiencia.id}" id="data"/>
+                    <select name="entidad_nombre" class="form-control" onchange="redireccionarUpdate(this.value)">
+                      <option th:each="enti:${listaEntidades}" th:selected="${experiencia.entidad.id} == ${enti.id}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for = "exp">
+                      Ocupación
+                    </label>
+                    <select name="id_ocupacion" class="form-control">
+                      <option th:each="ocup :${listaOcupacionesFiltrada}" th:text="${ocup.nombre}" th:value="${ocup.id}">ejemplo
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="exp">
+                      Nombre del logro:
+                    </label>
+                    <input type="text" class="text form-control" id="logroU" name="logro" th:value="${experiencia.logro}"/>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="exp">Visibilidad:</label>
+                    <select name="visibilidad" class="form-control">
+                      <option value="true" th:selected="${experiencia.visibilidad}==true">Visible</option>
+                      <option value="false" th:selected="${experiencia.visibilidad}==false">No visible</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 centro">
+                    <input type="hidden" th:value="${experiencia.id}"/>
+                    <button type="submit" class="btn btn-success bot-ocup" id="submitExpU" >
+                      Actualizar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="alert alert-danger escondido" role="alert" id="fallaLogro">
+              hay mas de 30 palabras en el logro
+            </div>
+          <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--FIN MODAL UPDATE-->
+
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -114,9 +186,9 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
-    <script src="/js/experiencias.js"></script>
+    <script src="/js/experienciasUpdate.js"></script>
     <script>
-      $('#crear').modal('toggle')
+      $('#actualizar').modal('toggle')
     </script>
   </body>
 </html>

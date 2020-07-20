@@ -75,6 +75,7 @@ function verificacion(){
 var main=function(){
   if(hayIntervalo==0){
     var intervalo = window.setInterval(verificacion,100);
+    hayIntervalo=1;
   }
 }
 

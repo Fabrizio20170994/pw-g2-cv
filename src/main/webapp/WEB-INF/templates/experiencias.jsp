@@ -9,7 +9,7 @@
   <body>
     <div th:replace="fragments/header :: header"></div>
     <div class="container contenido">
-      <button data-toggle="modal" data-target="#crear" id="modalCrear" class="btn btn-success" type="button">Crear Nueva Experiencia</button>
+      <button data-toggle="modal" data-target="#crear" id="modalCrear" class="btn btn-success marginArriba" type="button">Crear Nueva Experiencia</button>
     </div>
     <hr/>
     <div class="container contenido">
@@ -27,7 +27,8 @@
           <div class="col-md-3" th:text="${exp.entidad.nombre}"></div>
           <div class="col-md-3" th:text="${exp.ocupacion.nombre}"></div>
           <div class="col-md-3" th:text="${exp.logro}"></div>
-          <div class="col-md-3" th:text="${exp.visibilidad}"></div>
+          <div class="col-md-2" th:text="${exp.visibilidad}"></div>
+          <a class="col-md-1" th:href="'/ExperienciasUpdate/'+${exp.id}">actualizar</a>
         </div>
     </div>
     <!---->
@@ -52,7 +53,6 @@
                     </label>
                     <select name="entidad_nombre" class="form-control" onchange="redireccionar(this.value)">
                       <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
-                        <a th:href="'/actualizar-crear-experiencia/'+${enti.id}" type="hidden" id="${enti.id}"></a>
                       </option>
                     </select>
                   </div>
@@ -61,8 +61,8 @@
                       Ocupación
                     </label>
                     <select name="id_ocupacion" class="form-control">
-                      <!--<option th:each="ocup :${listaOcupaciones}" th:text="${ocup.nombre}" th:value="${ocup.id}">ejemplo
-                      </option>-->
+                      <option th:each="ocup :${listaOcupacionesFiltrada}" th:text="${ocup.nombre}" th:value="${ocup.id}">ejemplo
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -90,17 +90,8 @@
                 </div>
               </div>
             </form>
-            <div class="alert alert-danger escondido" role="alert" id="fallaAniosC">
-              Los años no cuadran
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="excesoDescripcionC">
-              Descripcion supera las 30 palabras
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="excesoNombreC">
-              Nombre supera los 250 caracteres
-            </div>
-            <div class="alert alert-danger escondido" role="alert" id="anioImayorC">
-              El año final es menor al inicial
+            <div class="alert alert-danger escondido" role="alert" id="fallaLogro">
+              hay mas de 30 palabras en el logro
             </div>
           <!---->
           </div>

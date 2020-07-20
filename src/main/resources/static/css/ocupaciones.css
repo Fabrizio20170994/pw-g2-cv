@@ -45,3 +45,6 @@ input[type=number]{
 .escondido{
     display: none;
 }
+.marginArriba{
+    margin-top: 1.5rem;
+}
