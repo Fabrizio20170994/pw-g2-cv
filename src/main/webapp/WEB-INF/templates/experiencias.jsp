@@ -47,13 +47,16 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" th:if="${paginaActual} &gt; 1" th:href="@{'/experiencias'(page=${pagAnterior})}">Previous</a></li>
+            <li class="page-item"><a class="page-link" th:if="${paginaActual} &lt; ${totalPaginas}" th:href="@{'/experiencias'(page=${pagSiguiente})}">Next</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" th:if="${paginaActual} &gt; 1" th:href="@{'/experiencias'(page=${pagAnterior})}">Previous</a></li>
-        <li class="page-item"><a class="page-link" th:if="${paginaActual} &lt; ${totalPaginas}" th:href="@{'/experiencias'(page=${pagSiguiente})}">Next</a></li>
-      </ul>
-    </nav>
+    
     <!---->
     <!--MODAL CREACION-->
     <div class="modal fade alert" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
