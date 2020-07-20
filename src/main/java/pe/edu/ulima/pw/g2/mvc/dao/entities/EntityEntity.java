@@ -1,11 +1,14 @@
 package pe.edu.ulima.pw.g2.mvc.dao.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +25,9 @@ public class EntityEntity {
 
     @ManyToOne
     private UserEntity user;
+
+    @OneToMany(mappedBy = "entidad")
+    private List<OcupationEntity> ocupaciones; 
 
     public String getDescripcion() {
         return descripcion;
@@ -55,15 +61,27 @@ public class EntityEntity {
         this.user = user;
     }
 
+    public List<OcupationEntity> getOcupaciones() {
+        return this.ocupaciones;
+    }
+
+    public void setOcupaciones(List<OcupationEntity> ocupaciones) {
+        this.ocupaciones = ocupaciones;
+    }
+
+
     public EntityEntity() {
 
     }
 
-    public EntityEntity(Long id, String nombre, String descripcion, UserEntity user) {
+    public EntityEntity(Long id, String nombre, String descripcion, UserEntity user, List<OcupationEntity> ocupaciones) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.user = user;
+        this.ocupaciones = ocupaciones;
     }
+
+
 
 }

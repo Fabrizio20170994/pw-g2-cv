@@ -70,7 +70,7 @@ public class EntityController {
         UserEntity customUser = (UserEntity) authentication.getPrincipal();
 
         final EntityEntity entityEntity = new EntityEntity(null, entityDto.getNombre(), entityDto.getDescripcion(),
-                customUser);
+                customUser, null);
 
         try {
             entityRepository.save(entityEntity);
@@ -110,7 +110,7 @@ public class EntityController {
         UserEntity customUser = (UserEntity) authentication.getPrincipal();
 
         EntityEntity entidadGuardar = new EntityEntity(null, entityDTO.getNombre(), entityDTO.getDescripcion(),
-                customUser);
+                customUser, null);
 
         entityRepository.saveAndFlush(entidadGuardar);
 

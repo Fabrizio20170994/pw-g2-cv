@@ -31,8 +31,8 @@
             <div th:text="${ocupacion.descripcion}">
             </div>
           </div>
-          <div class="logro">
-            <div>
+          <div class="logro" th:each="experiencia, iStat : ${ocupacion.experiencias}">
+            <div th:text="${experiencia.logro}">
               ACA PONGAN LO DE EXPERIENCIAS, PUEDEN AGREGARLE UN ATRIBUTO EXPERIENCIAS @OneToMany 
               A OcupacionEntity PARA SACAR LA LISTA DE AHI NOMAS
             </div>
