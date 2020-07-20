@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/css/bootstrap-min.css" />
     <link rel="stylesheet" href="/css/mis-datos.css" />
-    <title>Header</title>
+    <title>Mis datos</title>
   </head>
   <body>
     <div th:replace="fragments/header :: header"></div>
