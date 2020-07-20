@@ -5,6 +5,11 @@ function redireccionar(entidadId){
     location.href="/actualizar-crear-experiencia/" + entidadId;
 }
 
+function redireccionarUpdate(entidadId){
+    var experienciaID = document.getElementById("data").value;
+    location.href="/actualizar-actualizar-experiencia/" + entidadId +"/"+ experienciaID;
+}
+
 function verifacacionCrearExperiencia(){
     error=1;
     var nombre=document.getElementById("logro").value;

@@ -111,6 +111,51 @@ public class ExperienciasController {
         return "experienciasCrear";
     }
 
+    @GetMapping("/actualizar-actualizar-experiencia/{EntID}/{ExpID}")
+    public String actDeAct(@PathVariable String EntID, @PathVariable String ExpID, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity customUser = (UserEntity) authentication.getPrincipal();
+        Long IDEnt = Long.parseLong(EntID);
+        Optional<EntityEntity> OpEntidadFiltrada = repoEnt.findById(IDEnt);
+        int first=1;
+        List<EntityEntity> listaEntid = repoEnt.findUserEntities(customUser);
+        List<OcupationEntity> listaOcu = null;
+        for (EntityEntity ent : listaEntid){
+            if(first==1){
+                listaOcu = repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent);
+                first=0;
+            }else{
+                listaOcu.addAll(repoOcu.sacarOcupacionesDeEntidadesOrdenadas(ent));
+            }
+            //repoOcu.sacarOcupacionesDeEntidades(ent);
+        }
+        first=1;
+        List<ExperienciasEntity> listaExp = null;
+        for (OcupationEntity ocu : listaOcu){
+            if(first ==1){
+                listaExp = repoExp.sacarExperienciasDeOcupaciones(ocu);
+                first =0;
+            }else{
+                listaExp.addAll(repoExp.sacarExperienciasDeOcupaciones(ocu));
+            }
+        }
+        List<OcupationEntity> listaOcuFiltrada = null;
+            
+        EntityEntity entidadFiltrada = OpEntidadFiltrada.get();
+        listaOcuFiltrada = repoOcu.sacarOcupacionesDeEntidades(entidadFiltrada);
+        
+        Long IDExp = Long.parseLong(ExpID);
+        Optional<ExperienciasEntity> OpExp = repoExp.findById(IDExp);
+        ExperienciasEntity Exp = OpExp.get();
+        model.addAttribute("experiencia", Exp);
+        model.addAttribute("listaExperiencias", listaExp);
+        model.addAttribute("listaOcupaciones", listaOcu);
+        model.addAttribute("listaEntidades", listaEntid);
+        model.addAttribute("listaOcupacionesFiltrada", listaOcuFiltrada);
+        model.addAttribute("entidadID", entidadFiltrada);
+        return "experienciasUpdateRecargado";
+    }
+
 
     @PostMapping("/crear-experiencia")
     public String crearOcupacion(ExperienciaForm formita, Model model){

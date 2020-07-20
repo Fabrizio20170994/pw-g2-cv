@@ -53,7 +53,7 @@
                       Entidad:
                     </label>
                     <select name="entidad_nombre" class="form-control" onchange="redireccionar(this.value)">
-                      <option th:each="enti:${listaEntidades}" th:selected="${experiencia.entidad.id} == ${enti.id}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
+                      <option th:each="enti:${listaEntidades}" th:text="${enti.nombre}" th:value="${enti.id}" th:selected="${enti.id} == ${entidadID.id}">ejemplo
                       </option>
                     </select>
                   </div>
@@ -122,7 +122,7 @@
                     </label>
                     <input type="hidden" th:value="${experiencia.id}" id="data"/>
                     <select name="entidad_nombre" class="form-control" onchange="redireccionarUpdate(this.value)">
-                      <option th:each="enti:${listaEntidades}" th:selected="${experiencia.entidad.id} == ${enti.id}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
+                      <option th:each="enti:${listaEntidades}" th:selected="${enti.id} == ${entidadID.id}" th:text="${enti.nombre}" th:value="${enti.id}">ejemplo
                       </option>
                     </select>
                   </div>
